@@ -11,11 +11,11 @@
     >
 
       <el-form-item label="用户名" class="LoginItem" prop="adminUsername">
-        <el-input v-model="LoginForm.adminUsername" placeholder="请输入用户名" class="LoginInput"></el-input>
+        <el-input prefix-icon="User" v-model="LoginForm.adminUsername" placeholder="请输入用户名" class="LoginInput"></el-input>
       </el-form-item>
 
       <el-form-item label="密码" class="LoginItem" prop="adminPassword">
-        <el-input v-model="LoginForm.adminPassword" placeholder="请输入密码" show-password type="password" class="LoginInput"></el-input>
+        <el-input prefix-icon="Lock" v-model="LoginForm.adminPassword" placeholder="请输入密码" show-password type="password" class="LoginInput"></el-input>
       </el-form-item>
 
       <el-button type="primary" class="LoginButton" @click="handleLogin">登录</el-button>
@@ -57,7 +57,7 @@ const handleLogin = () => {
           if (res.statusCode === 200) {
             ElMessage.success(res.message)
             admin.$state = res.data
-            
+
           } else {
             ElMessage.error(res.message)
           }

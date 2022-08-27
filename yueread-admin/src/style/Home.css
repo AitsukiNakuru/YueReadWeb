@@ -1,0 +1,49 @@
+.Layout{
+
+}
+.HomeHeader{
+    width: 100%;
+    height: 80px;
+    background-color: #FFB6B9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+}
+
+.HomeTitle{
+
+}
+
+.HomePopover{
+
+}
+
+.HomeAside{
+    position: fixed;
+    top: 80px;
+    left: 0;
+
+    height: 100%;
+    width: 200px;
+
+    overflow-y: auto;
+    background-color: #FAE3D9;
+}
+
+.HomeAsideMenu{
+    background-color: #FAE3D9;
+}
+
+.HomeMain{
+    position: fixed;
+    top: 80px;
+    left: 200px;
+    width:calc(100% - 200px);
+    height: calc(100% - 80px);
+    background-color: #ffffff;
+}
