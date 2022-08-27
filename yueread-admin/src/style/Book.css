@@ -1,0 +1,11 @@
+
+
+
+.BookPage{
+    position: fixed;
+    bottom: 50px;
+    margin-left: calc(50% - 450px);
+    width: 500px;
+    padding: 0;
+
+}

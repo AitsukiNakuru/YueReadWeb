@@ -17,7 +17,7 @@
               <el-icon>
                 <Avatar></Avatar>
               </el-icon>
-              <label style="margin-left: 10px;">1111</label>
+              <label style="margin-left: 10px;">{{ adminStore.adminStore.adminNickname }}</label>
             </div>
           </template>
         </el-popover>
@@ -34,7 +34,7 @@
               class="HomeAsideMenu"
               :router="true"
           >
-            <div v-for="(item) in menu" :key="item.index">
+            <div v-for="(item, index) in menu" :key="index">
               <el-menu-item :index="item.index" :route="item.path">
                 <el-icon><component :is="item.icon"></component></el-icon>
                 <span>{{item.title}}</span>
@@ -57,36 +57,36 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
-
-import adminStore from "@/store/admin";
+import {ref, shallowRef} from 'vue';
+import {useAdminStore} from '@/store'
 import {ElMessage} from "element-plus";
 
 const menuActive = localStorage.getItem('menuActive');
 
-const admin = adminStore()
+const adminStore = useAdminStore()
+
 
 const menu = ref([
   {
-    index: 1,
+    index: '1',
     title: '书籍管理',
     icon: 'Reading',
     path: '/book'
   },
   {
-    index: 2,
+    index: '2',
     title: '分类管理',
     icon: 'CollectionTag',
     path: '/category'
   },
   {
-    index: 3,
+    index: '3',
     title: '订单管理',
     icon: 'List',
     path: '/order'
   },
   {
-    index: 4,
+    index: '4',
     title: '用户管理',
     icon: 'User',
     path: '/user'

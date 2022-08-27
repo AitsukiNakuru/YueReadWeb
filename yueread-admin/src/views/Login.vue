@@ -26,11 +26,12 @@
 
 <script  setup>
 import {ref} from 'vue';
-import {login} from '@/api/Login'
+import {apiLogin} from '@/api'
 import {ElMessage} from "element-plus";
-import adminStore from "@/store/admin";
+import {useAdminStore} from "@/store";
+import router from "@/router";
 
-const admin = adminStore()
+const adminStore = useAdminStore()
 const formSize = ref('default')
 const LoginFormRef = ref()
 const LoginForm = ref({
@@ -53,11 +54,11 @@ const rules = ref({
 const handleLogin = () => {
   LoginFormRef.value.validate(async (valid) => {
       if (valid) {
-        const res = await login(LoginForm.value)
+        const res = await apiLogin(LoginForm.value)
           if (res.statusCode === 200) {
             ElMessage.success(res.message)
-            admin.$state = res.data
-
+            adminStore.$state = res.data
+            router.push('/home')
           } else {
             ElMessage.error(res.message)
           }

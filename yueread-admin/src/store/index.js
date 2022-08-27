@@ -1,10 +1,71 @@
-import admin from './admin'
-import adminStore from "./admin";
+import {defineStore} from "pinia/dist/pinia";
 
 
-// 统一导出useStore方法
-export default function useStore() {
-    return {
-        admin: adminStore()
-    }
-}
+export const useAdminStore = defineStore('AdminStore', {
+    state: () =>{
+        return {
+            adminStore: {
+                // adminId: 'lin',
+                // adminUsername: 'lin',
+                // adminPassword: 'lin',
+                // adminNickname: 'lin'
+            },
+        }
+    },
+
+    getters: {
+
+    },
+
+    actions: {
+
+    },
+    persist: true
+})
+
+
+
+
+export const useBookStore = defineStore('BookStore', {
+    state: () =>{
+        return {
+            bookStore: {
+                // adminId: 'lin',
+                // adminUsername: 'lin',
+                // adminPassword: 'lin',
+                // adminNickname: 'lin'
+            },
+        }
+    },
+
+    getters: {
+
+    },
+
+    actions: {
+
+    },
+    persist: true
+})
+
+export const useCategory = defineStore('CategoryStore', {
+    state: () =>{
+        return {
+            categoryStore: {
+                // adminId: 'lin',
+                // adminUsername: 'lin',
+                // adminPassword: 'lin',
+                // adminNickname: 'lin'
+            },
+        }
+    },
+
+    getters: {
+
+    },
+
+    actions: {
+
+    },
+    persist: true
+})
