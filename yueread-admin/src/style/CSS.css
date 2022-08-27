@@ -1,0 +1,33 @@
+.LoginBoard{
+    width: 700px;
+    height: 500px;
+    margin: 200px auto;
+    background-color: #FFF9CA;
+    border-radius: 40px
+}
+
+.LoginForm{
+    text-align: center;
+}
+
+.LoginTitle{
+    font-size: 30px;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.LoginItem{
+    width: 600px;
+    margin: 50px auto;
+}
+
+.LoginInput{
+    height: 40px
+}
+
+.LoginButton{
+    margin-top: 20px;
+    height: 40px;
+    width: 80px;
+    border-radius: 5px
+}
