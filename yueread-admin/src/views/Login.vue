@@ -28,10 +28,9 @@
 import {ref} from 'vue';
 import {login} from '@/api/Login'
 import {ElMessage} from "element-plus";
-import adminStore from '../store'
+import adminStore from "@/store/admin";
 
-
-
+const admin = adminStore()
 const formSize = ref('default')
 const LoginFormRef = ref()
 const LoginForm = ref({
@@ -57,8 +56,7 @@ const handleLogin = () => {
         const res = await login(LoginForm.value)
           if (res.statusCode === 200) {
             ElMessage.success(res.message)
-            adminStore.$state = res.data
-            console.log(adminStore)
+            admin.$state = res.data
           } else {
             ElMessage.error(res.message)
           }
