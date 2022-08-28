@@ -45,7 +45,7 @@ export const useBookStore = defineStore('BookStore', {
     actions: {
 
     },
-    persist: true
+
 })
 
 export const useCategory = defineStore('CategoryStore', {
@@ -67,5 +67,5 @@ export const useCategory = defineStore('CategoryStore', {
     actions: {
 
     },
-    persist: true
+
 })

@@ -16,6 +16,22 @@ export const apiBookList = (data) => {
     })
 }
 
+export const apiBookListAll = (data) => {
+    return request({
+        url: '/book/listall',
+        method: 'POST',
+        data
+    })
+}
+
+export const apiBookCategoryList = (data) => {
+    return request({
+        url: '/book/listbycategory',
+        method: 'POST',
+        data
+    })
+}
+
 export const apiUpdateBook = (data) => {
     return request({
         url: '/book/update',
@@ -32,9 +48,18 @@ export const apiAddBook = (data) => {
     })
 }
 
+
 export const apiCategoryList = (data) => {
     return request({
         url: '/category/list',
+        method: 'POST',
+        data
+    })
+}
+
+export const apiAddCategory = (data) => {
+    return request({
+        url: '/category/add',
         method: 'POST',
         data
     })

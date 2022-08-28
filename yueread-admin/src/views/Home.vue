@@ -17,7 +17,7 @@
               <el-icon>
                 <Avatar></Avatar>
               </el-icon>
-              <label style="margin-left: 10px;">{{ adminStore.adminStore.adminNickname }}</label>
+              <label style="margin-left: 10px;">{{ adminStore.$state.adminNickname }}</label>
             </div>
           </template>
         </el-popover>

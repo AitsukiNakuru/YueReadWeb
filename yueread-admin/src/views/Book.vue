@@ -1,10 +1,9 @@
 <template>
   <el-table
       ref="tableRef"
-      :data="filterTableData"
+      :data="filterTableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
       style="width: 100%"
       @row-click="rowClick"
-
   >
     <el-table-column
         label="书名"
@@ -100,14 +99,16 @@
   </el-table>
 
   <el-pagination
-      v-model:currentPage="bookListParams.pageNumber"
-      v-model:page-size="bookListParams.pageSize"
-
-      :total='bookStore.$state.totalCount'
+      :currentPage="currentPage"
+      :total="totalCount"
+      :page-size="PageSize"
+      :page-sizes="[5, 10, 15, 20]"
       class="BookPage"
       layout="prev, pager, next, jumper"
       @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
   />
+  <el-button @click="Test">Test</el-button>
 
   <el-button type="primary" class="AddBookButton" @click="addBookButton" >添加书籍</el-button>
 
@@ -124,7 +125,6 @@
     :addBookForm="addBookForm"
     @handleAddCancel="handleAddCancel"
     @handleAddConfirm="handleAddConfirm"
-
   ></add-book>
 
 
@@ -134,7 +134,7 @@
 import {computed, onBeforeMount, onMounted, ref, toRefs, watch} from 'vue';
 import {ElMessage} from "element-plus";
 import router from "@/router";
-import {apiAddBook, apiBookList, apiCategoryList, apiLogin, apiUpdateBook} from "@/api";
+import {apiAddBook, apiBookList, apiBookListAll, apiCategoryList, apiLogin, apiUpdateBook} from "@/api";
 import {useAdminStore, useBookStore, useCategory} from "@/store";
 import {storeToRefs} from "pinia/dist/pinia";
 import BookDetail from '@/components/BookDetail'
@@ -151,22 +151,22 @@ let bookDetailVisible = ref(false)
 let addBookVisible = ref(false)
 let bookDetailForm = ref({})
 let addBookForm = ref({})
-const addBookFormValidate = ref(false)
-let bookDetailFormValidate = ref(false)
 
+const tableRef = ref()
 
-const bookListParams = ref({
-  pageNumber: 1,
-  pageSize: 10,
+let tableData = ref([{}])
 
-})
-
+let totalCount = ref(1)
+let currentPage = ref(1)
+const PageSize = ref(15)
 
 const getBookList = async () => {
   console.log('getBookList被调用')
-  const res = await apiBookList(bookListParams.value)
+  const res = await apiBookListAll()
   if (res.statusCode === 200) {
-    bookStore.$state = res.data
+    bookStore.$state.list = res.data
+    tableData.value = res.data
+    totalCount.value = res.data.length
   } else {
     ElMessage.error(res.message)
   }
@@ -184,7 +184,7 @@ const getCategoryList = async () => {
 const getAllInfo = async () => {
   await getBookList()
   await getCategoryList()
-  tableData = bookStore.$state.list
+
 }
 const updateBook = async () => {
   console.log('updateBook被调用')
@@ -198,8 +198,6 @@ const updateBook = async () => {
     ElMessage.error(res.message)
   }
 }
-
-
 const addBooK = async () => {
   console.log('addBook被调用')
   const res = await apiAddBook(addBookForm.value)
@@ -217,8 +215,7 @@ onMounted(() => {
   getAllInfo()
 })
 
-const tableRef = ref()
-let tableData = ref(bookStore.$state.list)
+
 
 const timeFormatter = (row, column, cellValue, index) => {
   let date = new Date(cellValue);
@@ -244,9 +241,8 @@ const searchAuthor = ref('')
 const searchBookName = ref('')
 const searchCategory = ref('')
 const searchPublisher = ref('')
-
 let filterTableData = computed(() => {
-  return bookStore.$state.list.filter(
+  return tableData.value.filter(
       (data) => (
           (!searchAuthor.value || data.bookAuthor.toLowerCase().match(searchAuthor.value.toLowerCase())) &&
           (!searchBookName.value || data.bookName.toLowerCase().match(searchBookName.value.toLowerCase())) &&
@@ -256,29 +252,21 @@ let filterTableData = computed(() => {
       )
   )
 })
-watch(tableData, (newValue, oldValue) => {
-  console.log('watch')
-  filterTableData = ref(tableData.value.filter(
-      (data) => (
-          (!searchAuthor.value || data.bookAuthor.toLowerCase().match(searchAuthor.value.toLowerCase())) &&
-          (!searchBookName.value || data.bookName.toLowerCase().match(searchBookName.value.toLowerCase())) &&
-          (!searchCategory.value || data.bookCategoryName.toLowerCase().match(searchCategory.value.toLowerCase())) &&
-          (!searchPublisher.value || data.publisher.toLowerCase().match(searchPublisher.value.toLowerCase()))
 
-      )
-  ))
-})
-
-const handleCurrentChange = () => {
-  getAllInfo()
+const handleCurrentChange = (val) => {
+  currentPage.value = val
+}
+const handleSizeChange = (val) => {
+  // 改变每页显示的条数
+  PageSize.value=val
+  // 注意：在改变每页显示的条数时，要将页码显示到第一页
+  currentPage.value=1
 }
 
 const rowClick = (row, column, cell, event) => {
   bookDetailVisible.value = true
   bookDetailForm.value = JSON.parse(JSON.stringify(row))
 }
-
-
 
 const handleDetailCancel = () => {
   bookDetailVisible.value = false
@@ -300,9 +288,11 @@ const addBookButton = () => {
   addBookVisible.value = true
 }
 
-const Log = () => {
-  console.log(tableData)
+
+const Test = () => {
   console.log(filterTableData)
+  console.log(totalCount)
+  console.log(currentPage)
 }
 
 </script>
