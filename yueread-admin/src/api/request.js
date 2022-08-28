@@ -9,11 +9,9 @@ const service = axios.create({
 
 service.interceptors.response.use(response => {
     const data = response.data
-    if (response.status === 200) {
-        return data;
-    } else {
-        ElMessage.error('服务器响应错误')
-    }
+    return Promise.resolve(data)
+}, error => {
+    return Promise.reject(error)
 })
 
 export default service

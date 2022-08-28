@@ -4,8 +4,14 @@
 .BookPage{
     position: fixed;
     bottom: 50px;
-    margin-left: calc(50% - 450px);
+    left: 250px;
     width: 500px;
     padding: 0;
 
+}
+
+.AddBookButton{
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
 }

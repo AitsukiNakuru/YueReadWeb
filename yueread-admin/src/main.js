@@ -8,7 +8,7 @@ import { createPinia } from 'pinia'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import index from './style/index.css'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-
+import 'default-passive-events'
 
 const app = createApp(App)
 app.use(router)

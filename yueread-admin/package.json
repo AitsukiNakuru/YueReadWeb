@@ -10,10 +10,12 @@
     "@element-plus/icons-vue": "^2.0.9",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
+    "default-passive-events": "^2.0.0",
     "element-plus": "^2.2.14",
     "pinia": "^2.0.21",
     "pinia-plugin-persistedstate": "^2.1.1",
     "vue": "^3.2.13",
+    "vue-class-component": "^7.2.6",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {

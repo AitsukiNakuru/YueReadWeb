@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7360da91-cb6c-4e71-bfdb-0af1bc792f58" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-admin/src/style/Book.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-admin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/api/Login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/api/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-admin/src/api/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/api/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-admin/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/store/admin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/store/book.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/style/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/style/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/style/Book.css" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/style/Book.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-admin/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

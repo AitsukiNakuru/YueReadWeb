@@ -2,14 +2,13 @@
   <el-table
       ref="tableRef"
       :data="filterTableData"
-      :default-sort="{ prop: 'bookName', order: 'descending' }"
       style="width: 100%"
       @row-click="rowClick"
+
   >
     <el-table-column
         label="书名"
         prop="bookName"
-        sortable
         width="250"
     >
       <template #header>
@@ -32,7 +31,6 @@
       </template>
     </el-table-column>
 
-
     <el-table-column
         label="封面"
         prop="bookCover"
@@ -51,7 +49,7 @@
     </el-table-column>
 
     <el-table-column
-        label="售价"
+        label="价格"
         prop="originalPrice" sortable
         width="150"
     >
@@ -111,19 +109,51 @@
       @current-change="handleCurrentChange"
   />
 
+  <el-button type="primary" class="AddBookButton" @click="addBookButton" >添加书籍</el-button>
+
+  <book-detail
+      v-model='bookDetailVisible'
+      :bookDetailForm="bookDetailForm"
+      @handleDetailCancel="handleDetailCancel"
+      @handleDetailConfirm="handleDetailConfirm"
+
+  ></book-detail>
+
+  <add-book
+    v-model='addBookVisible'
+    :addBookForm="addBookForm"
+    @handleAddCancel="handleAddCancel"
+    @handleAddConfirm="handleAddConfirm"
+
+  ></add-book>
+
+
 </template>
 
 <script setup>
-import {computed, onBeforeMount, onMounted, ref, toRefs} from 'vue';
+import {computed, onBeforeMount, onMounted, ref, toRefs, watch} from 'vue';
 import {ElMessage} from "element-plus";
 import router from "@/router";
-import {apiBookList, apiCategoryList} from "@/api";
+import {apiAddBook, apiBookList, apiCategoryList, apiLogin, apiUpdateBook} from "@/api";
 import {useAdminStore, useBookStore, useCategory} from "@/store";
 import {storeToRefs} from "pinia/dist/pinia";
+import BookDetail from '@/components/BookDetail'
+import AddBook from '@/components/AddBook'
+
+
 
 let adminStore = useAdminStore()
 let bookStore = useBookStore()
 let categoryStore = useCategory()
+
+
+let bookDetailVisible = ref(false)
+let addBookVisible = ref(false)
+let bookDetailForm = ref({})
+let addBookForm = ref({})
+const addBookFormValidate = ref(false)
+let bookDetailFormValidate = ref(false)
+
 
 const bookListParams = ref({
   pageNumber: 1,
@@ -131,8 +161,9 @@ const bookListParams = ref({
 
 })
 
+
 const getBookList = async () => {
-  console.log("getBookList")
+  console.log('getBookList被调用')
   const res = await apiBookList(bookListParams.value)
   if (res.statusCode === 200) {
     bookStore.$state = res.data
@@ -141,10 +172,11 @@ const getBookList = async () => {
   }
 }
 const getCategoryList = async () => {
-  console.log("getCategoryList")
+  console.log('getCategoryList被调用')
   const res = await apiCategoryList()
   if (res.statusCode === 200) {
-    categoryStore.$state = res.data
+    categoryStore.$state.list = res.data
+
   } else {
     ElMessage.error(res.message)
   }
@@ -152,15 +184,41 @@ const getCategoryList = async () => {
 const getAllInfo = async () => {
   await getBookList()
   await getCategoryList()
-
+  tableData = bookStore.$state.list
 }
+const updateBook = async () => {
+  console.log('updateBook被调用')
+  const res = await apiUpdateBook(bookDetailForm.value)
+  if (res.statusCode === 200) {
+    ElMessage.success(res.message)
+    await getAllInfo()
+    bookDetailVisible.value = false
+
+  } else {
+    ElMessage.error(res.message)
+  }
+}
+
+
+const addBooK = async () => {
+  console.log('addBook被调用')
+  const res = await apiAddBook(addBookForm.value)
+  if (res.statusCode === 200) {
+    ElMessage.success(res.message)
+    await getAllInfo()
+    addBookVisible.value = false
+  } else {
+    ElMessage.error(res.message)
+  }
+}
+
+
 onMounted(() => {
   getAllInfo()
-  console.log(categoryStore.$state)
 })
 
 const tableRef = ref()
-const tableData = ref(bookStore.$state.list)
+let tableData = ref(bookStore.$state.list)
 
 const timeFormatter = (row, column, cellValue, index) => {
   let date = new Date(cellValue);
@@ -187,24 +245,64 @@ const searchBookName = ref('')
 const searchCategory = ref('')
 const searchPublisher = ref('')
 
-const filterTableData = computed(() =>
-    tableData.value.filter(
-        (data) => (
-            (!searchAuthor.value || data.bookAuthor.toLowerCase().match(searchAuthor.value.toLowerCase())) &&
-            (!searchBookName.value || data.bookName.toLowerCase().match(searchBookName.value.toLowerCase())) &&
-            (!searchCategory.value || data.bookCategoryName.toLowerCase().match(searchCategory.value.toLowerCase())) &&
-            (!searchPublisher.value || data.publisher.toLowerCase().match(searchPublisher.value.toLowerCase()))
+let filterTableData = computed(() => {
+  return bookStore.$state.list.filter(
+      (data) => (
+          (!searchAuthor.value || data.bookAuthor.toLowerCase().match(searchAuthor.value.toLowerCase())) &&
+          (!searchBookName.value || data.bookName.toLowerCase().match(searchBookName.value.toLowerCase())) &&
+          (!searchCategory.value || data.bookCategoryName.toLowerCase().match(searchCategory.value.toLowerCase())) &&
+          (!searchPublisher.value || data.publisher.toLowerCase().match(searchPublisher.value.toLowerCase()))
 
-        )
-    )
-)
+      )
+  )
+})
+watch(tableData, (newValue, oldValue) => {
+  console.log('watch')
+  filterTableData = ref(tableData.value.filter(
+      (data) => (
+          (!searchAuthor.value || data.bookAuthor.toLowerCase().match(searchAuthor.value.toLowerCase())) &&
+          (!searchBookName.value || data.bookName.toLowerCase().match(searchBookName.value.toLowerCase())) &&
+          (!searchCategory.value || data.bookCategoryName.toLowerCase().match(searchCategory.value.toLowerCase())) &&
+          (!searchPublisher.value || data.publisher.toLowerCase().match(searchPublisher.value.toLowerCase()))
+
+      )
+  ))
+})
 
 const handleCurrentChange = () => {
-
+  getAllInfo()
 }
 
-const rowClick = () => {
+const rowClick = (row, column, cell, event) => {
+  bookDetailVisible.value = true
+  bookDetailForm.value = JSON.parse(JSON.stringify(row))
+}
 
+
+
+const handleDetailCancel = () => {
+  bookDetailVisible.value = false
+  getAllInfo()
+
+}
+const handleDetailConfirm = () => {
+  updateBook(bookDetailForm)
+}
+
+const handleAddCancel = () => {
+  addBookVisible.value = false;
+}
+const handleAddConfirm = () => {
+  addBooK(addBookForm)
+}
+
+const addBookButton = () => {
+  addBookVisible.value = true
+}
+
+const Log = () => {
+  console.log(tableData)
+  console.log(filterTableData)
 }
 
 </script>
