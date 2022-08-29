@@ -64,3 +64,11 @@ export const apiAddCategory = (data) => {
         data
     })
 }
+
+export const apiUpdateCategory = (data) => {
+    return request({
+        url: '/category/update',
+        method: 'POST',
+        data
+    })
+}

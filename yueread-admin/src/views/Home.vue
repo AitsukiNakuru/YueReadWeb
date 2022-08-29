@@ -30,9 +30,10 @@
         <el-aside class="HomeAside">
 
           <el-menu
-              default-active="1"
+              :default-active="activeMenu"
               class="HomeAsideMenu"
               :router="true"
+              @select="selectMenu"
           >
             <div v-for="(item, index) in menu" :key="index">
               <el-menu-item :index="item.index" :route="item.path">
@@ -57,14 +58,15 @@
 </template>
 
 <script setup>
-import {ref, shallowRef} from 'vue';
-import {useAdminStore} from '@/store'
+import {onMounted, ref, shallowRef} from 'vue';
+import {useAdminStore, useHomeParams} from '@/store'
 import {ElMessage} from "element-plus";
 
-const menuActive = localStorage.getItem('menuActive');
+
 
 const adminStore = useAdminStore()
-
+const homeParams = useHomeParams()
+let activeMenu = ref()
 
 const menu = ref([
   {
@@ -93,7 +95,13 @@ const menu = ref([
   }
 ])
 
+const selectMenu = (index, path) => {
+  localStorage.setItem("activeMenu", JSON.stringify(index))
+}
 
+onMounted(() => {
+  activeMenu.value = JSON.parse(localStorage.getItem("activeMenu"))
+})
 
 </script>
 

@@ -23,9 +23,6 @@ export const useAdminStore = defineStore('AdminStore', {
     persist: true
 })
 
-
-
-
 export const useBookStore = defineStore('BookStore', {
     state: () =>{
         return {
@@ -68,4 +65,21 @@ export const useCategory = defineStore('CategoryStore', {
 
     },
 
+})
+
+export const useHomeParams = defineStore('HomeParamsStore', {
+    state: () =>{
+        return {
+            activeMenu: '1'
+        }
+    },
+
+    getters: {
+
+    },
+
+    actions: {
+
+    },
+    persist: true
 })

@@ -10,8 +10,9 @@
       :border="parentBorder"
       :data="filterTableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
       style="width: 100%; height:85%"
-      @row-dblclick="rowClick"
+      @cell-click="cellClick"
   >
+
     <el-table-column type="expand" class="infinite-list">
       <template #default="props">
         <div>
@@ -37,6 +38,7 @@
     </el-table-column>
 
     <el-table-column label="分类" prop="categoryName"/>
+    <el-table-column label="书籍数量" prop="books.length"/>
 
   </el-table>
   <el-pagination
@@ -47,13 +49,34 @@
       layout="prev, pager, next, jumper"
       @current-change="handleCurrentChange"
   />
+  <el-dialog v-model="categoryDetailVisible" title="Shipping address">
+    <el-form :model="categoryDetailForm">
+      <el-form-item label="分类名称" >
+        <el-input v-model="categoryDetailForm.categoryName" autocomplete="off" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="categoryDetailVisible = false">取消</el-button>
+        <el-button type="primary" @click="handleUpdateConfirm">确认修改</el-button>
+      </span>
+    </template>
+  </el-dialog>
   <el-button @click="TestButton">TestButton</el-button>
 
 </template>
 
 <script setup>
 import {onMounted, ref, computed} from 'vue';
-import {apiBookCategoryList, apiCategoryList, apiBookList, apiAddBook, apiBookListAll, apiAddCategory} from "@/api";
+import {
+  apiBookCategoryList,
+  apiCategoryList,
+  apiBookList,
+  apiAddBook,
+  apiBookListAll,
+  apiAddCategory,
+  apiUpdateCategory
+} from "@/api";
 import {ElMessage} from "element-plus";
 import {useAdminStore, useBookStore, useCategory} from "@/store";
 
@@ -68,9 +91,15 @@ const childBorder = ref(false)
 let categoryList = ref()
 let bookList = ref()
 let categorySearch = ref()
-
 let currentPage = ref(1)
 const PageSize = ref(10)
+let categoryDetailVisible = ref(false)
+let categoryDetailForm = ref({
+  categoryId: null,
+  categoryName: ''
+})
+
+
 
 const getBookListAll = async () => {
   console.log('getBookListAll被调用')
@@ -95,6 +124,7 @@ const generateTableData = async () => {
   await getBookListAll()
   await getCategoryList()
   console.log('generateTableData被调用')
+  tableData.value = []
   categoryList.value.forEach(item => {
     let temp = bookList.value.filter((data) => (data.bookCategoryId === item.categoryId))
     tableData.value.push({
@@ -114,6 +144,17 @@ const addCategory = async () => {
     ElMessage.success(res.message)
     await generateTableData()
 
+  } else {
+    ElMessage.error(res.message)
+  }
+}
+const updateCategory = async () => {
+  console.log('updateCategory被调用')
+  const res = await apiUpdateCategory(categoryDetailForm.value)
+  if (res.statusCode === 200) {
+    ElMessage.success(res.message)
+    categoryDetailVisible.value = false
+    await generateTableData()
   } else {
     ElMessage.error(res.message)
   }
@@ -149,6 +190,7 @@ let addCategoryDisable = computed(() => {
 let totalCount = computed(() => {
   return filterTableData.value.length
 })
+
 const handleAddCategory = () => {
   if (categorySearch.value != null) {
     addCategory()
@@ -159,12 +201,20 @@ const handleCurrentChange = (val) => {
   currentPage.value = val
 }
 
-const rowClick = (row, column) => {
+const handleUpdateConfirm = () => {
+ updateCategory()
+}
 
+
+const cellClick = (row, column, cell, event) => {
+  categoryDetailForm.value.categoryName = JSON.parse(JSON.stringify(row.categoryName))
+  categoryDetailForm.value.categoryId = JSON.parse(JSON.stringify(row.categoryId))
+  console.log(categoryDetailForm.value)
+  categoryDetailVisible.value = true
 }
 
 const TestButton = () => {
-  console.log(totalCount)
+  console.log(tableData.value)
 }
 </script>
 

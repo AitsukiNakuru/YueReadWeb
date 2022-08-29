@@ -156,7 +156,7 @@ const tableRef = ref()
 
 let tableData = ref([{}])
 
-let totalCount = ref(1)
+
 let currentPage = ref(1)
 const PageSize = ref(15)
 
@@ -166,7 +166,7 @@ const getBookList = async () => {
   if (res.statusCode === 200) {
     bookStore.$state.list = res.data
     tableData.value = res.data
-    totalCount.value = res.data.length
+
   } else {
     ElMessage.error(res.message)
   }
@@ -251,6 +251,9 @@ let filterTableData = computed(() => {
 
       )
   )
+})
+let totalCount = computed(() => {
+  return filterTableData.value.length
 })
 
 const handleCurrentChange = (val) => {
