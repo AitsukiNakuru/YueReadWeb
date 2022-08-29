@@ -1,0 +1,77 @@
+.tools{
+    height: 35px;
+    background-color: #F9F9F9
+}
+.tool_welcome{
+    margin-left: 1200px;
+}
+.tool_user{
+    height: 16px;
+    margin-left: 8px;
+    font-size: 19px;
+}
+
+
+.line_out{
+    height: 100px;
+}
+.line_out_title{
+    font-size: 70px;
+    margin-left: 100px;
+
+}
+.line_out_search{
+    height: 40px;
+    width: 600px;
+    margin-left: 25%;
+    margin-top: 25px;
+}
+.line_out_button{
+    width: 100px;
+    height: 50px;
+    margin-top: 20px;
+}
+
+
+.first_screen{
+    height: calc(100% - 135px);
+
+}
+.first_screen_menu{
+
+    overflow: auto;
+}
+.first_screen_carousel{
+    width: 1200px;
+    margin: 0 auto;
+    height: 500px;
+}
+.first_screen_carousel_item{
+    height: 500px;
+}
+.first_screen_carousel_card{
+    height: 500px;
+    padding: 0;
+}
+.first_screen_carousel_image{
+    height: 500px;
+    width: 400px;
+    background-color: #3cadeb;
+}
+.first_screen_carousel_info{
+    height: 500px;
+    width: 800px;
+
+}
+.first_screen_carousel_info h1{
+    margin: 0;
+    padding: 20px 0 10px 100px;
+}
+
+.bookList{
+    display: flex;
+    flex-wrap: wrap;
+}
+.bookList_card{
+    margin: 10px;
+}

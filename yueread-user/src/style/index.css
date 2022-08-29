@@ -1,0 +1,13 @@
+@import url('Login.css');
+@import url('Home.css');
+
+
+
+html, body, #app{
+     width: 100%;
+     height: 100vh;
+     margin: 0;
+     padding: 0;
+     background-color: #ffffff;
+ }
+

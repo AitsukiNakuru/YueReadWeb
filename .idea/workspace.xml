@@ -5,12 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7360da91-cb6c-4e71-bfdb-0af1bc792f58" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/yueread-user/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/babel.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/jsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/api/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/api/request.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/assets/bookStore.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/router/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/store/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/style/Home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/style/Login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/style/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Book.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Login.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/vue.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yueread-user/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Category.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/style/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/style/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,21 +61,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "fileTemplates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cittruss/Documents/Code/MyProject/YueReadWeb/yueread-user/src&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Cittruss\Documents\Code\MyProject\YueReadWeb\yueread-user\src" />
+      <recent name="C:\Users\Cittruss\Documents\Code\MyProject\YueReadWeb\yueread-user\src\views" />
+      <recent name="C:\Users\Cittruss\Documents\Code\MyProject\YueReadWeb\yueread-user\src\style" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Cittruss\Documents\Code\MyProject\YueReadWeb\yueread-user\src\assets" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -64,6 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1661574965687</updated>
       <workItem from="1661574967385" duration="344000" />
+      <workItem from="1661764650299" duration="16361000" />
     </task>
     <servers />
   </component>
@@ -80,5 +114,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

@@ -1,0 +1,61 @@
+.Background{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to left, #9c88ff, #3cadeb);
+    display: flex;
+    justify-content: center;
+}
+.a{
+    position: relative;
+    top: 150px;
+    width: 1100px;
+    height: 550px;
+    box-shadow:0 5px 15px rgba(0, 0, 0, 8);
+    display: flex;
+}
+.b{
+    width: 700px;
+    height: 550px;
+    background-image: url("../assets/bookStore.jpg");
+    background-size: cover;
+}
+.c{
+    width: 400px;
+    height: 550px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.d{
+    width: 350px;
+    height: 500px;
+    align-items: center;
+
+}
+.d h1{
+    font: 900 30px '';
+    margin-left: 60px;
+    height: 80px;
+}
+.e{
+    width: 330px;
+    height: 40px;
+    font: 900 16px '';
+
+}
+.f{
+    float: right;
+    margin: 10px 0;
+}
+.g{
+    position: absolute;
+    margin: 20px auto;
+    bottom: 60px;
+    width: 100px;
+    height: 40px;
+    font: 900 15px '';
+
+
+}
