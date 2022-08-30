@@ -16,10 +16,11 @@
       </div>
     </div>
     <div class="bookList">
-      <div v-for="(item, index) in bookList">
-        <el-card :body-style="{ padding: '0px'}" class="bookList_card">
+      <div v-for="(item, index) in bookList" >
+        <el-card :body-style="{ padding: '0px'}" v-bind:id="item.bookId" class="bookList_card" @click="handleCard">
           <img
               src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              v-bind:id="item.bookId"
               class="image"
           />
           <div style="padding: 14px">
@@ -36,15 +37,17 @@ import {ref, onMounted, computed} from 'vue';
 import {useBookStore, useCategoryStore, useIndexConfigStore, useUserStore} from "@/store";
 import {apiBookListAll, apiCategoryList, apiIndexConfigList} from "@/api";
 import { Search, ShoppingCart, Tickets } from '@element-plus/icons-vue'
+import {useRoute, useRouter} from "vue-router/dist/vue-router";
 
-
+const router = useRouter()
+const route = useRoute()
 
 let userStore = useUserStore()
 let bookStore = useBookStore()
 let categoryStore = useCategoryStore()
 let indexConfigStore = useIndexConfigStore()
 let search = ref()
-
+let selectBook = ref()
 
 let indexCarouselData = ref([])
 let selectCategory = computed(() => {
@@ -100,19 +103,19 @@ const getAllInfo = async () => {
   await getIndexConfigList()
 }
 
-
-
-
-
-
-
 onMounted(async () => {
-
+  await getAllInfo()
 })
 
+
+const handleCard = (item) => {
+  selectBook.value = bookStore.$state.list.filter((data) => data.bookId == item.target.id)[0]
+  bookStore.$state.selectBook = selectBook.value
+  router.push('/book')
+}
+
 const TestButton = () => {
-  console.log(bookList.value)
-  console.log(bookList2.value)
+  console.log(selectBook)
 }
 </script>
 

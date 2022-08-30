@@ -5,33 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7360da91-cb6c-4e71-bfdb-0af1bc792f58" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/yueread-user/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/jsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/api/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/api/request.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/assets/bookStore.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/router/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/style/Home.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/style/Login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/style/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Book.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/src/views/Login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/vue.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yueread-user/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/style/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/style/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/style/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/style/Home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Book.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Book.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1661574965687</updated>
       <workItem from="1661574967385" duration="344000" />
-      <workItem from="1661764650299" duration="16361000" />
+      <workItem from="1661764650299" duration="33280000" />
     </task>
     <servers />
   </component>

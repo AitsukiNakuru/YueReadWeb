@@ -29,6 +29,9 @@ export const useBookStore = defineStore('BookStore', {
             selectCategory: {
 
             },
+            selectBook: {
+
+            }
         }
     },
 

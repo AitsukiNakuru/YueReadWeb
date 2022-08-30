@@ -25,7 +25,10 @@
 import {ref, onMounted} from 'vue';
 import {apiBookListAll, apiCategoryList, apiIndexConfigList} from "@/api";
 import {useBookStore, useCategoryStore, useIndexConfigStore, useUserStore} from "@/store";
+import {useRoute, useRouter} from "vue-router/dist/vue-router";
 
+const router = useRouter()
+const route = useRoute()
 
 let userStore = useUserStore()
 let bookStore = useBookStore()

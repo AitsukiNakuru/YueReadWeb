@@ -38,7 +38,7 @@
 
 }
 .first_screen_menu{
-
+    height: 100%;
     overflow: auto;
 }
 .first_screen_carousel{
@@ -74,4 +74,21 @@
 }
 .bookList_card{
     margin: 10px;
+}
+
+
+.book_card{
+    height: 99%;
+
+}
+.book_card_content{
+
+}
+.book_card_content_image{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+.book_card_content_detail{
+    display: flex;
 }

@@ -8,7 +8,6 @@ export const apiLogin = (data) => {
         data
     })
 }
-
 export const apiRegister = (data) => {
     return request({
         url: '/user/register',
@@ -18,7 +17,6 @@ export const apiRegister = (data) => {
 }
 
 
-
 export const apiBookList = (data) => {
     return request({
         url: '/book/list',
@@ -26,7 +24,6 @@ export const apiBookList = (data) => {
         data
     })
 }
-
 export const apiBookListAll = (data) => {
     return request({
         url: '/book/listall',
@@ -34,7 +31,6 @@ export const apiBookListAll = (data) => {
         data
     })
 }
-
 export const apiBookCategoryList = (data) => {
     return request({
         url: '/book/listbycategory',
@@ -42,7 +38,6 @@ export const apiBookCategoryList = (data) => {
         data
     })
 }
-
 export const apiUpdateBook = (data) => {
     return request({
         url: '/book/update',
@@ -50,7 +45,6 @@ export const apiUpdateBook = (data) => {
         data
     })
 }
-
 export const apiAddBook = (data) => {
     return request({
         url: '/book/add',
@@ -67,7 +61,6 @@ export const apiCategoryList = (data) => {
         data
     })
 }
-
 export const apiAddCategory = (data) => {
     return request({
         url: '/category/add',
@@ -75,7 +68,6 @@ export const apiAddCategory = (data) => {
         data
     })
 }
-
 export const apiUpdateCategory = (data) => {
     return request({
         url: '/category/update',
@@ -93,4 +85,33 @@ export const apiIndexConfigList = (data) => {
     })
 }
 
+
+export const apiAddCartItem = (data) => {
+    return request({
+        url: '/cart/add',
+        method: 'POST',
+        data
+    })
+}
+export const apiUpdateCartItem = (data) => {
+    return request({
+        url: '/cart/update',
+        method: 'POST',
+        data
+    })
+}
+export const apiDeleteCartItem = (data) => {
+    return request({
+        url: '/cart/delete',
+        method: 'POST',
+        data
+    })
+}
+export const apiCartItemList = (data) => {
+    return request({
+        url: '/cart/list',
+        method: 'POST',
+        data
+    })
+}
 
