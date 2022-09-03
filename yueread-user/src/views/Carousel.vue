@@ -1,7 +1,7 @@
 <template>
   <el-carousel :interval="5000" arrow="always" v-if="carouselBookList[0]!=null" class="first_screen_carousel">
-    <el-carousel-item v-for="(item, index) in carouselBookList" :key="index" class="first_screen_carousel_item">
-      <el-card :body-style="{ padding: '0px' }" class="first_screen_carousel_card">
+    <el-carousel-item v-for="(item, index) in carouselBookList" :key="index" class="first_screen_carousel_item" >
+      <el-card :body-style="{ padding: '0px' }" class="first_screen_carousel_card" v-bind:id="item.bookId" @click="handleCard" >
         <el-row style="width: 1200px">
           <el-col :span="8">
             <div class="first_screen_carousel_image"></div>
@@ -56,7 +56,11 @@ const getAllInfo = async () => {
   await getCarouselBookList()
 }
 
+const handleCard = (item) => {
+  console.log(item)
 
+
+}
 
 
 onMounted(async () => {

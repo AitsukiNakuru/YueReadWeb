@@ -44,7 +44,7 @@
       </el-form-item>
 
       <el-form-item label="价格" prop="originalPrice">
-        <el-input v-model="bookDetailForm.originalPrice" />
+        <el-input-number v-model="bookDetailForm.originalPrice" />
       </el-form-item>
 
       <el-form-item label="出版社" prop="publisher">

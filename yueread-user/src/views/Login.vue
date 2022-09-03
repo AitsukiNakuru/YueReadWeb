@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import {apiLogin, apiRegister} from '@/api'
 import {ElMessage} from "element-plus";
 import router from "@/router";
@@ -110,6 +110,10 @@ const handleChange = () => {
   }
 }
 
+
+onMounted(() => {
+  localStorage.clear();
+})
 
 </script>
 

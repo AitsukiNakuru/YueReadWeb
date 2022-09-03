@@ -9,37 +9,37 @@
     <el-table-column
         label="书名"
         prop="bookName"
-        width="250"
+        width="200"
     >
       <template #header>
         <slot>书名</slot>
         <el-input v-model="searchBookName" placeholder="请输入书名" size="small"
-                  style="margin-left: 5px;width: 140px;"></el-input>
+                  style="margin-left: 5px; width: 140px"></el-input>
       </template>
     </el-table-column>
 <!--作者-->
     <el-table-column align="left"
                      label="作者"
                      prop="bookAuthor"
-                     width="auto"
+                     width="160"
     >
 
       <template #header>
         <slot>作者</slot>
         <el-input v-model="searchAuthor" placeholder="请输入作者" size="small"
-                  style="margin-left: 5px;width: 140px;"></el-input>
+                  style="margin-left: 5px;width: 100px;"></el-input>
       </template>
     </el-table-column>
 <!--封面-->
     <el-table-column
         label="封面"
         prop="bookCover"
-        width="auto"
+        width="200"
     />
 <!--分类-->
     <el-table-column
         label="分类"
-        prop="bookCategoryName" width="auto"
+        prop="bookCategoryName" width="160"
     >
       <template #header>
         <slot>分类</slot>
@@ -51,7 +51,7 @@
     <el-table-column
         label="价格"
         prop="originalPrice" sortable
-        width="auto"
+        width="160"
     >
 
     </el-table-column>
@@ -59,12 +59,12 @@
     <el-table-column
         label="出版社"
         prop="publisher"
-        width="auto"
+        width="200"
     >
       <template #header>
         <slot>出版社</slot>
         <el-input v-model="searchPublisher" placeholder="请输入出版社" size="small"
-                  style="margin-left: 5px;width: 160px;"></el-input>
+                  style="margin-left: 5px;width: 120px;"></el-input>
       </template>
     </el-table-column>
 <!--出版日期-->
@@ -73,13 +73,13 @@
         label="出版日期"
         prop="publishDate"
         sortable
-        width="auto"
+        width="120"
     />
 <!--库存-->
     <el-table-column
         label="库存"
         prop="bookStock" sortable
-        width="auto"
+        width="100"
     >
 
     </el-table-column>
@@ -87,7 +87,7 @@
     <el-table-column
         label="销量"
         prop="bookSale" sortable
-        width="auto"
+        width="100"
     >
 
     </el-table-column>
@@ -101,7 +101,7 @@
         filter-placement="bottom-end"
         label="销售状态"
         prop="bookStatus"
-        width="auto"
+        width="100"
 
     >
       <template #default="scope">

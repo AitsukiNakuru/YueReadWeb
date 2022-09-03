@@ -3,7 +3,7 @@
   <el-row class="tools">
     <el-col :span="24" style="display: flex">
       <div class="tool_welcome">欢迎光临悦读</div>
-      <el-link class="tool_user">{{ userStore.$state.userNickname }}</el-link>
+      <el-link class="tool_user" @click="handleUserDetail">{{ userStore.$state.userNickname }}</el-link>
     </el-col>
   </el-row>
 
@@ -29,6 +29,7 @@
 <!--  左侧分类+右侧router-view-->
   <el-row class="first_screen">
     <el-col :span="4">
+      <h1>书籍分类</h1>
       <el-menu
           class="first_screen_menu"
           @select="selectMenu"
@@ -74,6 +75,31 @@
       </div>
     </template>
   </el-drawer>
+
+<!--  用户详情-->
+  <el-dialog
+      v-model="dialogVisible"
+      title="修改用户信息"
+  >
+    <el-form :model="updateFrom" ref="updateFormRef" :rules="rules">
+      <el-form-item label="用户名" prop="userUsername">
+        <el-input v-model="updateFrom.userUsername"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="userPassword">
+        <el-input v-model="updateFrom.userPassword"></el-input>
+      </el-form-item>
+      <el-form-item label="昵称" prop="userNickname">
+        <el-input v-model="updateFrom.userNickname"></el-input>
+      </el-form-item>
+    </el-form>
+
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="handleUpdateCancel">取消</el-button>
+        <el-button type="primary" @click="handleUpdateConfirm">确认</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
@@ -85,7 +111,7 @@ import {
   apiBookListByCategory,
   apiCartItemList,
   apiCategoryList,
-  apiDeleteCartItem, apiPurchaseList,
+  apiDeleteCartItem, apiPurchaseList, apiUpdate,
 } from "@/api";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import {ElMessage} from "element-plus";
@@ -118,6 +144,31 @@ let filterCartItemList = computed(() => {
 })
 let showShoppingCart = ref(false)
 let selectionBookList = ref()
+
+
+//用户详情
+let dialogVisible = ref(false)
+const updateFormRef = ref()
+const updateFrom = ref({
+  userId: userStore.$state.userId,
+  userUsername: '',
+  userPassword: '',
+  userNickname: ''
+})
+const rules = ref({
+  userUsername: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度在3-20之间', trigger: 'blur' },
+  ],
+  userPassword: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 3, max: 20, message: '密码长度在3-20之间', trigger: 'blur' },
+  ],
+  userNickname: [
+    { required: true, message: '请输入昵称', trigger: 'blur' },
+    { min: 3, max: 20, message: '昵称长度在3-20之间', trigger: 'blur' },
+  ],
+})
 
 //向后台获取数据
 const getCategoryList = async () => {
@@ -231,6 +282,30 @@ const handleSelectionChange = (selection) => {
     })
   })
 }
+const handleUserDetail = () => {
+  updateFrom.value = JSON.parse(JSON.stringify(userStore.$state))
+  dialogVisible.value = true;
+}
+const handleUpdateCancel = () => {
+  dialogVisible.value = false;
+}
+const handleUpdateConfirm = () => {
+  updateFormRef.value.validate(async (valid) => {
+    if (valid) {
+      const res = await apiUpdate(updateFrom.value)
+      if (res.statusCode === 200) {
+        ElMessage.success(res.message)
+        dialogVisible.value = false
+        userStore.$state = updateFrom.value
+      } else {
+        ElMessage.error(res.message)
+      }
+    } else {
+      ElMessage.info('请正确输入用户信息')
+    }
+  })
+}
+
 
 
 onMounted(async () => {

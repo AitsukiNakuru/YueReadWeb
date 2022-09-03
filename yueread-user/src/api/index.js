@@ -15,6 +15,13 @@ export const apiRegister = (data) => {
         data
     })
 }
+export const apiUpdate = (data) => {
+    return request({
+        url: '/user/update',
+        method: 'POST',
+        data
+    })
+}
 
 
 export const apiBookListAll = (data) => {

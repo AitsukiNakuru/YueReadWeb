@@ -8,6 +8,15 @@ export const apiLogin = (data) => {
     })
 }
 
+export const apiUpdate = (data) => {
+    return request({
+        url: '/admin/update',
+        method: 'POST',
+        data
+    })
+}
+
+
 
 export const apiBookListAll = (data) => {
     return request({
@@ -42,6 +51,7 @@ export const apiAddBook = (data) => {
 }
 
 
+
 export const apiCategoryList = (data) => {
     return request({
         url: '/category/list',
@@ -61,6 +71,23 @@ export const apiAddCategory = (data) => {
 export const apiUpdateCategory = (data) => {
     return request({
         url: '/category/update',
+        method: 'POST',
+        data
+    })
+}
+
+
+
+export const apiUserList = (data) => {
+    return request({
+        url: '/user/list',
+        method: 'POST',
+        data
+    })
+}
+export const apiUserUpdate = (data) => {
+    return request({
+        url: '/user/update',
         method: 'POST',
         data
     })
