@@ -6,6 +6,7 @@
       style="margin-left: 10px"
       type="primary"
   >添加分类</el-button>
+
   <el-table
       :border="parentBorder"
       :data="filterTableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
@@ -16,13 +17,100 @@
     <el-table-column type="expand" class="infinite-list">
       <template #default="props">
         <div>
-          <el-table :border="childBorder" :data="props.row.books">
-            <el-table-column label="书籍名称" prop="bookName"/>
-            <el-table-column label="作者" prop="bookAuthor"/>
-            <el-table-column label="价格" prop="originalPrice"/>
-            <el-table-column label="出版社" prop="publisher"/>
-            <el-table-column :formatter="timeFormatter" label="出版日期" prop="publishDate"/>
-            <el-table-column label="销售状态" prop="bookStatus">
+          <el-table :border="childBorder" :data="props.row.bookList">
+            <!--书名-->
+            <el-table-column
+                label="书名"
+                prop="bookName"
+                width="250"
+            >
+              <template #header>
+                <slot>书名</slot>
+              </template>
+            </el-table-column>
+            <!--作者-->
+            <el-table-column align="left"
+                             label="作者"
+                             prop="bookAuthor"
+                             width="auto"
+            >
+
+              <template #header>
+                <slot>作者</slot>
+
+              </template>
+            </el-table-column>
+            <!--封面-->
+            <el-table-column
+                label="封面"
+                prop="bookCover"
+                width="auto"
+            />
+            <!--分类-->
+            <el-table-column
+                label="分类"
+                prop="bookCategoryName" width="auto"
+            >
+              <template #header>
+                <slot>分类</slot>
+
+              </template>
+            </el-table-column>
+            <!--价格-->
+            <el-table-column
+                label="价格"
+                prop="originalPrice" sortable
+                width="auto"
+            >
+
+            </el-table-column>
+            <!--出版社-->
+            <el-table-column
+                label="出版社"
+                prop="publisher"
+                width="auto"
+            >
+              <template #header>
+                <slot>出版社</slot>
+              </template>
+            </el-table-column>
+            <!--出版日期-->
+            <el-table-column
+                :formatter="timeFormatter"
+                label="出版日期"
+                prop="publishDate"
+                sortable
+                width="auto"
+            />
+            <!--库存-->
+            <el-table-column
+                label="库存"
+                prop="bookStock" sortable
+                width="auto"
+            >
+
+            </el-table-column>
+            <!--销量-->
+            <el-table-column
+                label="销量"
+                prop="bookSale" sortable
+                width="auto"
+            >
+
+            </el-table-column>
+            <!--销售状态-->
+            <el-table-column
+                :filter-method="statusFilter"
+                :filters="[
+        { text: '已上架', value: 1 },
+        { text: '未上架', value: 0 }
+        ]"
+                filter-placement="bottom-end"
+                label="销售状态"
+                prop="bookStatus"
+                width="auto"
+
+            >
               <template #default="scope">
                 <el-tag
                     :type="scope.row.bookStatus === 1 ? '' : 'danger'"
@@ -38,9 +126,10 @@
     </el-table-column>
 
     <el-table-column label="分类" prop="categoryName"/>
-    <el-table-column label="书籍数量" prop="books.length"/>
+    <el-table-column label="书籍数量" prop="bookList.length"/>
 
   </el-table>
+
   <el-pagination
       :currentPage="currentPage"
       :total="totalCount"
@@ -49,7 +138,8 @@
       layout="prev, pager, next, jumper"
       @current-change="handleCurrentChange"
   />
-  <el-dialog v-model="categoryDetailVisible" title="Shipping address">
+
+  <el-dialog v-model="categoryDetailVisible" title="分类修改">
     <el-form :model="categoryDetailForm">
       <el-form-item label="分类名称" >
         <el-input v-model="categoryDetailForm.categoryName" autocomplete="off" />
@@ -62,6 +152,7 @@
       </span>
     </template>
   </el-dialog>
+
   <el-button @click="TestButton">TestButton</el-button>
 
 </template>
@@ -69,9 +160,8 @@
 <script setup>
 import {onMounted, ref, computed} from 'vue';
 import {
-  apiBookCategoryList,
+  apiBookListByCategory,
   apiCategoryList,
-  apiBookList,
   apiAddBook,
   apiBookListAll,
   apiAddCategory,
@@ -81,68 +171,48 @@ import {ElMessage} from "element-plus";
 import {useAdminStore, useBookStore, useCategory} from "@/store";
 
 
-
+//Pinia
 let adminStore = useAdminStore()
 let bookStore = useBookStore()
 let categoryStore = useCategory()
-const tableData = ref([])
+
+//表格数据
 const parentBorder = ref(false)
 const childBorder = ref(false)
-let categoryList = ref()
-let bookList = ref()
+let bookListByCategory = ref([])
+let filterTableData = computed(() => {
+  return bookListByCategory.value.filter((data) => (data.categoryName.match(categorySearch.value)))
+})
 let categorySearch = ref()
 let currentPage = ref(1)
+let totalCount = computed(() => {
+  return filterTableData.value.length
+})
 const PageSize = ref(10)
+
+//子组件数据
 let categoryDetailVisible = ref(false)
 let categoryDetailForm = ref({
   categoryId: null,
   categoryName: ''
 })
 
-
-
-const getBookListAll = async () => {
-  console.log('getBookListAll被调用')
-  const res = await apiBookListAll()
+//向后台获取数据
+const getBookListByCategory = async () => {
+  console.log('apiBookListByCategory被调用')
+  const res = await apiBookListByCategory()
   if (res.statusCode === 200) {
-    bookList.value = res.data
-  } else {
-    ElMessage.error(res.message)
+    bookStore.$state.bookListByCategory = res.data
+    bookListByCategory.value = res.data
+    console.log(bookListByCategory.value)
   }
-}
-const getCategoryList = async () => {
-  console.log('getCategoryList被调用')
-  const res = await apiCategoryList()
-  if (res.statusCode === 200) {
-    categoryStore.$state.list = res.data
-    categoryList.value = res.data
-  } else {
-    ElMessage.error(res.message)
-  }
-}
-const generateTableData = async () => {
-  await getBookListAll()
-  await getCategoryList()
-  console.log('generateTableData被调用')
-  tableData.value = []
-  categoryList.value.forEach(item => {
-    let temp = bookList.value.filter((data) => (data.bookCategoryId === item.categoryId))
-    tableData.value.push({
-      categoryId: item.categoryId,
-      categoryName: item.categoryName,
-      books: temp
-
-    })
-  })
-  console.log(tableData)
-
 }
 const addCategory = async () => {
   console.log('addCategory被调用')
   const res = await apiAddCategory({"categoryName":categorySearch.value})
   if (res.statusCode === 200) {
     ElMessage.success(res.message)
-    await generateTableData()
+    await getBookListByCategory()
 
   } else {
     ElMessage.error(res.message)
@@ -154,16 +224,14 @@ const updateCategory = async () => {
   if (res.statusCode === 200) {
     ElMessage.success(res.message)
     categoryDetailVisible.value = false
-    await generateTableData()
+    await getBookListByCategory()
   } else {
     ElMessage.error(res.message)
   }
 }
 
-onMounted(() => {
-  generateTableData()
-})
 
+//表格数据修饰
 const timeFormatter = (row, column, cellValue, index) => {
   let date = new Date(cellValue);
   let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
@@ -181,31 +249,22 @@ const statusTag = (cellValue) => {
   }
 }
 
-let filterTableData = computed(() => {
-  return tableData.value.filter((data) => (data.categoryName.match(categorySearch.value)))
-})
+
+//事件方法
 let addCategoryDisable = computed(() => {
   return !(filterTableData.value.length===0)
 })
-let totalCount = computed(() => {
-  return filterTableData.value.length
-})
-
 const handleAddCategory = () => {
   if (categorySearch.value != null) {
     addCategory()
   }
 }
-
 const handleCurrentChange = (val) => {
   currentPage.value = val
 }
-
 const handleUpdateConfirm = () => {
  updateCategory()
 }
-
-
 const cellClick = (row, column, cell, event) => {
   categoryDetailForm.value.categoryName = JSON.parse(JSON.stringify(row.categoryName))
   categoryDetailForm.value.categoryId = JSON.parse(JSON.stringify(row.categoryId))
@@ -213,6 +272,10 @@ const cellClick = (row, column, cell, event) => {
   categoryDetailVisible.value = true
 }
 
+
+onMounted(async () => {
+  await getBookListByCategory()
+})
 const TestButton = () => {
   console.log(tableData.value)
 }

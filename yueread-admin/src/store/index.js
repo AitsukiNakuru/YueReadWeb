@@ -5,10 +5,7 @@ export const useAdminStore = defineStore('AdminStore', {
     state: () =>{
         return {
             adminStore: {
-                // adminId: 'lin',
-                // adminUsername: 'lin',
-                // adminPassword: 'lin',
-                // adminNickname: 'lin'
+
             },
         }
     },
@@ -26,12 +23,14 @@ export const useAdminStore = defineStore('AdminStore', {
 export const useBookStore = defineStore('BookStore', {
     state: () =>{
         return {
-            bookStore: {
-                // adminId: 'lin',
-                // adminUsername: 'lin',
-                // adminPassword: 'lin',
-                // adminNickname: 'lin'
+            //所有书籍列表
+            bookList: {
+
             },
+            //分类好的书籍列表
+            bookListByCategory: {
+
+            }
         }
     },
 
@@ -48,11 +47,9 @@ export const useBookStore = defineStore('BookStore', {
 export const useCategory = defineStore('CategoryStore', {
     state: () =>{
         return {
-            categoryStore: {
-                // adminId: 'lin',
-                // adminUsername: 'lin',
-                // adminPassword: 'lin',
-                // adminNickname: 'lin'
+            //分类列表
+            categoryList: {
+
             },
         }
     },

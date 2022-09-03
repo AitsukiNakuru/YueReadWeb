@@ -17,13 +17,6 @@ export const apiRegister = (data) => {
 }
 
 
-export const apiBookList = (data) => {
-    return request({
-        url: '/book/list',
-        method: 'POST',
-        data
-    })
-}
 export const apiBookListAll = (data) => {
     return request({
         url: '/book/listall',
@@ -31,23 +24,9 @@ export const apiBookListAll = (data) => {
         data
     })
 }
-export const apiBookCategoryList = (data) => {
+export const apiBookListByCategory = (data) => {
     return request({
         url: '/book/listbycategory',
-        method: 'POST',
-        data
-    })
-}
-export const apiUpdateBook = (data) => {
-    return request({
-        url: '/book/update',
-        method: 'POST',
-        data
-    })
-}
-export const apiAddBook = (data) => {
-    return request({
-        url: '/book/add',
         method: 'POST',
         data
     })
@@ -61,25 +40,11 @@ export const apiCategoryList = (data) => {
         data
     })
 }
-export const apiAddCategory = (data) => {
-    return request({
-        url: '/category/add',
-        method: 'POST',
-        data
-    })
-}
-export const apiUpdateCategory = (data) => {
-    return request({
-        url: '/category/update',
-        method: 'POST',
-        data
-    })
-}
 
 
-export const apiIndexConfigList = (data) => {
+export const apiCarouselBookList = (data) => {
     return request({
-        url: '/index/list',
+        url: '/book/carousel',
         method: 'POST',
         data
     })
@@ -115,3 +80,18 @@ export const apiCartItemList = (data) => {
     })
 }
 
+
+export const apiPurchaseBook = (data) => {
+    return request({
+        url: '/book/purchase',
+        method: 'POST',
+        data
+    })
+}
+export const apiPurchaseList = (data) => {
+    return request({
+        url: '/book/purchaselist',
+        method: 'POST',
+        data
+    })
+}

@@ -1,6 +1,6 @@
 <template>
-  <el-carousel :interval="5000" arrow="always" v-if="indexCarouselData[0]!=null" class="first_screen_carousel">
-    <el-carousel-item v-for="(item, index) in indexCarouselData" :key="index" class="first_screen_carousel_item">
+  <el-carousel :interval="5000" arrow="always" v-if="carouselBookList[0]!=null" class="first_screen_carousel">
+    <el-carousel-item v-for="(item, index) in carouselBookList" :key="index" class="first_screen_carousel_item">
       <el-card :body-style="{ padding: '0px' }" class="first_screen_carousel_card">
         <el-row style="width: 1200px">
           <el-col :span="8">
@@ -23,72 +23,44 @@
 
 <script setup>
 import {ref, onMounted} from 'vue';
-import {apiBookListAll, apiCategoryList, apiIndexConfigList} from "@/api";
-import {useBookStore, useCategoryStore, useIndexConfigStore, useUserStore} from "@/store";
+import {apiBookListAll, apiCarouselBookList, apiCategoryList} from "@/api";
+import {useBookStore, useCategoryStore, useUserStore} from "@/store";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
+import {ElMessage} from "element-plus";
 
 const router = useRouter()
 const route = useRoute()
 
-let userStore = useUserStore()
+
+
 let bookStore = useBookStore()
 let categoryStore = useCategoryStore()
-let indexConfigStore = useIndexConfigStore()
-
-let search = ref()
-let categoryMenuData = ref([])
-let indexCarouselData = ref([])
 
 
-const getBookList = async () => {
-  console.log('getBookList被调用')
-  const res = await apiBookListAll()
+
+let carouselBookList = ref([])
+
+
+
+
+const getCarouselBookList = async () =>{
+  console.log('getCarouselBookList被调用')
+  const res = await apiCarouselBookList()
   if (res.statusCode === 200) {
-    bookStore.$state.list = res.data
-
-  } else {
-    ElMessage.error(res.message)
-  }
-}
-const getCategoryList = async () => {
-  console.log('getCategoryList被调用')
-  const res = await apiCategoryList()
-  if (res.statusCode === 200) {
-    categoryStore.$state.list = res.data
-
-  } else {
-    ElMessage.error(res.message)
-  }
-}
-const getIndexConfigList = async () =>{
-  console.log('getIndexConfigList被调用')
-  const res = await apiIndexConfigList()
-  if (res.statusCode === 200) {
-    indexConfigStore.$state.list = res.data
+    carouselBookList.value = res.data
   } else {
     ElMessage.error(res.message)
   }
 }
 const getAllInfo = async () => {
-  await getBookList()
-  await getCategoryList()
-  await getIndexConfigList()
+  await getCarouselBookList()
 }
 
 
-const generateIndexCarousel = async () => {
-  await getIndexConfigList()
-  indexConfigStore.$state.list.forEach((item) =>{
-    let temp = bookStore.$state.list.filter((data) => (data.bookId === item.bookId))
-    indexCarouselData.value.push(temp[0])
-  })
 
-}
 
 onMounted(async () => {
-  await getBookList()
-
-  await generateIndexCarousel()
+  await getCarouselBookList()
 })
 
 </script>

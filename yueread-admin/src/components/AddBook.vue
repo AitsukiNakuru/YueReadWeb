@@ -21,7 +21,6 @@
               :key="item.categoryId"
               :label="item.categoryName"
               :value="item.categoryName"
-
           />
         </el-select>
       </el-form-item>
@@ -54,6 +53,11 @@
         />
       </el-form-item>
 
+      <el-form-item label="库存" prop="bookStock">
+        <el-input v-model="addBookForm.bookStock" />
+      </el-form-item>
+
+
       <el-form-item label="销售状态" prop="bookStatus">
         <el-radio-group v-model="addBookForm.bookStatus">
           <el-radio label='1' border>已上架</el-radio>
@@ -82,7 +86,7 @@ import router from "@/router";
 
 let categoryStore = useCategory()
 
-const categoryList = categoryStore.$state.list
+const categoryList = categoryStore.$state.categoryList
 
 let props = defineProps({
   addBookVisible: Boolean,
@@ -125,6 +129,10 @@ const rules = ref({
   ],
   publishDate: [
     { required: true, message: '请输入出版日期', trigger: 'blur' },
+  ],
+  bookStock: [
+    { required: true, message: '请输入库存', trigger: 'blur' },
+    { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
   ],
   bookStatus: [
     { required: true, message: '销售状态', trigger: 'blur' },

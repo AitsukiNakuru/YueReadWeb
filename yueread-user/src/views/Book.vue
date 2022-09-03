@@ -62,8 +62,8 @@
 
 <script setup>
 import {ref, onMounted, computed} from 'vue';
-import {useBookStore, useCategoryStore, useIndexConfigStore, useUserStore} from "@/store";
-import {apiAddCartItem, apiBookListAll, apiCategoryList, apiIndexConfigList, apiUpdateCartItem} from "@/api";
+import {useBookStore, useUserStore} from "@/store";
+import {apiAddCartItem, apiBookListAll, apiPurchaseBook, apiPurchaseList, apiUpdateCartItem} from "@/api";
 import { Search, ShoppingCart, Tickets } from '@element-plus/icons-vue'
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import {ElMessage} from "element-plus";
@@ -71,10 +71,11 @@ import {ElMessage} from "element-plus";
 const router = useRouter()
 const route = useRoute()
 
+//Pinia
 let userStore = useUserStore()
 let bookStore = useBookStore()
-let categoryStore = useCategoryStore()
-let indexConfigStore = useIndexConfigStore()
+
+
 
 let selectBook = ref(bookStore.$state.selectBook)
 let bookCount = ref(1)
@@ -83,26 +84,7 @@ const getBookList = async () => {
   console.log('getBookList被调用')
   const res = await apiBookListAll()
   if (res.statusCode === 200) {
-    bookStore.$state.list = res.data
-  } else {
-    ElMessage.error(res.message)
-  }
-}
-const getCategoryList = async () => {
-  console.log('getCategoryList被调用')
-  const res = await apiCategoryList()
-  if (res.statusCode === 200) {
-    categoryStore.$state.list = res.data
-
-  } else {
-    ElMessage.error(res.message)
-  }
-}
-const getIndexConfigList = async () =>{
-  console.log('getIndexConfigList被调用')
-  const res = await apiIndexConfigList()
-  if (res.statusCode === 200) {
-    indexConfigStore.$state.list = res.data
+    bookStore.$state.bookList = res.data
   } else {
     ElMessage.error(res.message)
   }
@@ -116,18 +98,22 @@ const addCartItem = async (data) =>{
     ElMessage.error(res.message)
   }
 }
+const purchaseBook = async (data) => {
+  console.log('purchaseBook被调用')
+  const res = await apiPurchaseBook(data)
+  if (res.statusCode === 200) {
+    ElMessage.success(res.message)
+  } else {
+    ElMessage.error(res.message)
+  }
+}
+
 
 const getAllInfo = async () => {
   await getBookList()
-  await getCategoryList()
-  await getIndexConfigList()
+
 }
 
-onMounted(async () => {
-  await getAllInfo()
-  selectBook.value.publishDate = timeFormatter(selectBook.value.publishDate)
-  console.log(selectBook)
-})
 
 
 const handleAddCartItem = () => {
@@ -138,7 +124,12 @@ const handleAddCartItem = () => {
   })
 }
 const handlePurchase = () => {
-
+  purchaseBook({
+    userId: userStore.$state.userId,
+    bookId: selectBook.value.bookId,
+    bookCount: bookCount.value,
+    price: selectBook.value.originalPrice
+  })
 }
 
 
@@ -151,7 +142,10 @@ const timeFormatter = (cellValue) => {
   let mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
   return date.getFullYear() + "-" + month + "-" + currentDate
 }
-
+onMounted(async () => {
+  await getAllInfo()
+  selectBook.value.publishDate = timeFormatter(selectBook.value.publishDate)
+})
 const TestButton = () => {
   console.log(bookCount.value)
 }

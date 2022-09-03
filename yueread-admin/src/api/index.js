@@ -8,13 +8,6 @@ export const apiLogin = (data) => {
     })
 }
 
-export const apiBookList = (data) => {
-    return request({
-        url: '/book/list',
-        method: 'POST',
-        data
-    })
-}
 
 export const apiBookListAll = (data) => {
     return request({
@@ -24,7 +17,7 @@ export const apiBookListAll = (data) => {
     })
 }
 
-export const apiBookCategoryList = (data) => {
+export const apiBookListByCategory = (data) => {
     return request({
         url: '/book/listbycategory',
         method: 'POST',

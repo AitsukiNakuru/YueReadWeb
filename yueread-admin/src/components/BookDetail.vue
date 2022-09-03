@@ -26,7 +26,7 @@
               :key="item.categoryId"
               :label="item.categoryName"
               :value="item.categoryName"
-
+              :rules="rules"
           />
         </el-select>
       </el-form-item>
@@ -51,6 +51,10 @@
         <el-input v-model="bookDetailForm.publisher" />
       </el-form-item>
 
+      <el-form-item label="库存" prop="bookStock">
+        <el-input-number v-model="bookDetailForm.bookStock" />
+      </el-form-item>
+
       <el-form-item label="销售状态" prop="publishDate">
         <el-date-picker
             v-model="bookDetailForm.publishDate"
@@ -69,6 +73,7 @@
 
 
     </el-form>
+
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="$emit('handleDetailCancel')">取消</el-button>
@@ -84,9 +89,45 @@ import {useAdminStore, useBookStore, useCategory} from "@/store";
 
 let categoryStore = useCategory()
 
-const categoryList = categoryStore.$state.list
+const categoryList = categoryStore.$state.categoryList
 
-
+const rules = ref({
+  bookName: [
+    { required: true, message: '请输入书名', trigger: 'blur' },
+  ],
+  bookIsbn: [
+    { required: true, message: '请输入ISBN', trigger: 'blur' },
+  ],
+  bookAuthor: [
+    { required: true, message: '请输入作者', trigger: 'blur' },
+  ],
+  bookIntro: [
+    { required: true, message: '请输入简介', trigger: 'blur' },
+  ],
+  bookCover: [
+    { required: true, message: '请输入封面', trigger: 'blur' },
+  ],
+  detailContent: [
+    { required: true, message: '请输入详细信息', trigger: 'blur' },
+  ],
+  originalPrice: [
+    { required: true, message: '请输入价格', trigger: 'blur' },
+    { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+  ],
+  publisher: [
+    { required: true, message: '请输入出版社', trigger: 'blur' },
+  ],
+  publishDate: [
+    { required: true, message: '请输入出版日期', trigger: 'blur' },
+  ],
+  bookStock: [
+    { required: true, message: '请输入库存', trigger: 'blur' },
+    { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+  ],
+  bookStatus: [
+    { required: true, message: '销售状态', trigger: 'blur' },
+  ],
+})
 
 let props = defineProps({
   bookDetailVisible: Boolean,
@@ -110,10 +151,7 @@ const changeCategory = (val) => {
 
 const bookDetailFormRef = ref()
 
-const log = () => {
-  console.log(props.bookDetailForm)
-  console.log(categoryList)
-}
+
 
 </script>
 

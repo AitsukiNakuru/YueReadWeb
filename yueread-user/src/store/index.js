@@ -4,9 +4,7 @@ import {defineStore} from "pinia/dist/pinia";
 export const useUserStore = defineStore('UserStore', {
     state: () =>{
         return {
-            userStore: {
-
-            },
+            userStore: {},
         }
     },
 
@@ -23,15 +21,11 @@ export const useUserStore = defineStore('UserStore', {
 export const useBookStore = defineStore('BookStore', {
     state: () =>{
         return {
-            bookStore: {
-
-            },
-            selectCategory: {
-
-            },
-            selectBook: {
-
-            }
+            //所有书籍列表
+            bookList: [],
+            //分类好的书籍列表
+            bookListByCategory: [],
+            selectBook: {}
         }
     },
 
@@ -48,9 +42,8 @@ export const useBookStore = defineStore('BookStore', {
 export const useCategoryStore = defineStore('CategoryStore', {
     state: () =>{
         return {
-            categoryStore: {
-
-            },
+            categoryList: [],
+            selectCategory: {},
         }
     },
 
@@ -61,25 +54,8 @@ export const useCategoryStore = defineStore('CategoryStore', {
     actions: {
 
     },
-
+    persist: true
 })
 
-export const useIndexConfigStore = defineStore('IndexConfigStore', {
-    state: () =>{
-        return {
-            IndexConfigStore: {
 
-            },
-        }
-    },
-
-    getters: {
-
-    },
-
-    actions: {
-
-    },
-
-})
 

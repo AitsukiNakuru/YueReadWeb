@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="bookList">
-      <div v-for="(item, index) in bookList" >
+      <div v-for="(item, index) in filterBookList" >
         <el-card :body-style="{ padding: '0px'}" v-bind:id="item.bookId" class="bookList_card" @click="handleCard">
           <img
               src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
@@ -34,73 +34,55 @@
 
 <script setup>
 import {ref, onMounted, computed} from 'vue';
-import {useBookStore, useCategoryStore, useIndexConfigStore, useUserStore} from "@/store";
-import {apiBookListAll, apiCategoryList, apiIndexConfigList} from "@/api";
+import {useBookStore, useCategoryStore, useUserStore} from "@/store";
+import {apiBookListAll, apiBookListByCategory, apiCategoryList} from "@/api";
 import { Search, ShoppingCart, Tickets } from '@element-plus/icons-vue'
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 
 const router = useRouter()
 const route = useRoute()
 
-let userStore = useUserStore()
+//Pinia
 let bookStore = useBookStore()
 let categoryStore = useCategoryStore()
-let indexConfigStore = useIndexConfigStore()
+
+
 let search = ref()
 let selectBook = ref()
 
-let indexCarouselData = ref([])
+
 let selectCategory = computed(() => {
-  return bookStore.$state.selectCategory
-})
-let bookList2 = computed(() => {
-  return  bookStore.$state.list.filter((data) => (data.bookCategoryId === selectCategory.value.categoryId))
-
-})
-let bookList = computed(() => {
-  return bookList2.value.filter(
-      (data) =>
-          ((!search.value || data.bookName.toLowerCase().match(search.value.toLowerCase()))) ||
-          ((!search.value || data.bookAuthor.toLowerCase().match(search.value.toLowerCase()))) ||
-          ((!search.value || data.publisher.toLowerCase().match(search.value.toLowerCase()))) ||
-          ((!search.value || data.bookIntro.toLowerCase().match(search.value.toLowerCase()))) ||
-          ((!search.value || data.bookIsbn.toLowerCase().match(search.value.toLowerCase())))
-  )
+  return categoryStore.$state.selectCategory
 })
 
+let bookListData = computed(() => {
+  return bookStore.$state.bookListByCategory.filter(data =>
+      (data.categoryId === categoryStore.$state.selectCategory.categoryId))[0].bookList
+})
+let filterBookList = computed(() => {
+  return bookListData.value.filter((data) => (
+          (!search.value || data.bookAuthor.toLowerCase().match(search.value.toLowerCase())) ||
+          (!search.value || data.bookName.toLowerCase().match(search.value.toLowerCase())) ||
+          (!search.value || data.bookCategoryName.toLowerCase().match(search.value.toLowerCase())) ||
+          (!search.value || data.publisher.toLowerCase().match(search.value.toLowerCase()))
+  ))
+})
 
-const getBookList = async () => {
-  console.log('getBookList被调用')
-  const res = await apiBookListAll()
-  if (res.statusCode === 200) {
-    bookStore.$state.list = res.data
-  } else {
-    ElMessage.error(res.message)
-  }
-}
-const getCategoryList = async () => {
-  console.log('getCategoryList被调用')
-  const res = await apiCategoryList()
-  if (res.statusCode === 200) {
-    categoryStore.$state.list = res.data
 
-  } else {
-    ElMessage.error(res.message)
-  }
-}
-const getIndexConfigList = async () =>{
-  console.log('getIndexConfigList被调用')
-  const res = await apiIndexConfigList()
+const getBookListByCategory = async () => {
+  console.log('getBookListByCategory被调用')
+  const res = await apiBookListByCategory()
   if (res.statusCode === 200) {
-    indexConfigStore.$state.list = res.data
-  } else {
-    ElMessage.error(res.message)
+    bookStore.$state.bookListByCategory = res.data
+
   }
 }
+
+
 const getAllInfo = async () => {
-  await getBookList()
-  await getCategoryList()
-  await getIndexConfigList()
+
+  await getBookListByCategory()
+
 }
 
 onMounted(async () => {
@@ -108,14 +90,15 @@ onMounted(async () => {
 })
 
 
+
 const handleCard = (item) => {
-  selectBook.value = bookStore.$state.list.filter((data) => data.bookId == item.target.id)[0]
-  bookStore.$state.selectBook = selectBook.value
+  bookStore.$state.selectBook = bookStore.$state.bookList.filter((data) => data.bookId == item.target.id)[0]
+
   router.push('/book')
 }
 
 const TestButton = () => {
-  console.log(selectBook)
+  console.log(bookListData.value)
 }
 </script>
 

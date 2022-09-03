@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7360da91-cb6c-4e71-bfdb-0af1bc792f58" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Category.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-user/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-user/src/style/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/style/Home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Book.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Book.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" afterDir="false" />
@@ -79,7 +83,10 @@
       <option name="presentableId" value="Default" />
       <updated>1661574965687</updated>
       <workItem from="1661574967385" duration="344000" />
-      <workItem from="1661764650299" duration="33280000" />
+      <workItem from="1661764650299" duration="47297000" />
+      <workItem from="1662007733935" duration="2550000" />
+      <workItem from="1662095254075" duration="1914000" />
+      <workItem from="1662168866099" duration="4896000" />
     </task>
     <servers />
   </component>

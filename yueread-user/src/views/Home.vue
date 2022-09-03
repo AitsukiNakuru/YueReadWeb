@@ -20,18 +20,13 @@
       </el-col>
 
       <el-col :span="4">
-        <div>
-          <el-button-group>
-            <el-button class="line_out_button" :icon="ShoppingCart" @click="handleShowShoppingCart">购物车</el-button>
-            <el-button class="line_out_button" :icon="Tickets">订单</el-button>
-            <el-button @click="TestButton">TestButton</el-button>
+        <el-button class="line_out_button" :icon="ShoppingCart" @click="handleShowShoppingCart">购物车</el-button>
 
-          </el-button-group>
-        </div>
+        <el-button @click="TestButton">TestButton</el-button>
       </el-col>
   </el-row>
 
-<!--  轮播图-->
+<!--  左侧分类+右侧router-view-->
   <el-row class="first_screen">
     <el-col :span="4">
       <el-menu
@@ -40,7 +35,7 @@
 
       >
         <div v-for="(item, index) in categoryMenuData" :key="index" >
-          <el-menu-item :index="item.index" @click="clickMenu" >
+          <el-menu-item :index="item.index" >
             <span>{{item.data.categoryName}}</span>
           </el-menu-item>
         </div>
@@ -53,6 +48,7 @@
 
   </el-row>
 
+<!--  购物车-->
   <el-drawer v-model="showShoppingCart" direction="rtl">
     <template #header>
       <h1>购物车</h1>
@@ -83,23 +79,31 @@
 <script setup>
 import {onMounted, ref, computed} from 'vue';
 import { Search, ShoppingCart, Tickets } from '@element-plus/icons-vue'
-import {useBookStore, useCategoryStore, useIndexConfigStore, useUserStore} from "@/store";
-import {apiBookListAll, apiCartItemList, apiCategoryList, apiDeleteCartItem, apiIndexConfigList} from "@/api";
+import {useBookStore, useCategoryStore, useUserStore} from "@/store";
+import {
+  apiBookListAll,
+  apiBookListByCategory,
+  apiCartItemList,
+  apiCategoryList,
+  apiDeleteCartItem, apiPurchaseList,
+} from "@/api";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import {ElMessage} from "element-plus";
-
-
 const router = useRouter()
 const route = useRoute()
 
-let userStore = useUserStore()
-let bookStore = useBookStore()
-let categoryStore = useCategoryStore()
-let indexConfigStore = useIndexConfigStore()
 
-let search = ref()
+//Pinia
+let userStore = useUserStore()
+let categoryStore = useCategoryStore()
+let bookStore = useBookStore()
+
+
+//分类菜单数据
 let categoryMenuData = ref([])
-let indexCarouselData = ref([])
+
+
+//购物车数据
 let cartSearch = ref()
 let cartItemList = ref([])
 let filterCartItemList = computed(() => {
@@ -112,33 +116,24 @@ let filterCartItemList = computed(() => {
           ((!cartSearch.value || data.bookInfo.bookIsbn.toLowerCase().match(cartSearch.value.toLowerCase())))
   )
 })
-
 let showShoppingCart = ref(false)
+let selectionBookList = ref()
 
-const getBookList = async () => {
-  console.log('getBookList被调用')
-  const res = await apiBookListAll()
-  if (res.statusCode === 200) {
-    bookStore.$state.list = res.data
-  } else {
-    ElMessage.error(res.message)
-  }
-}
+//向后台获取数据
 const getCategoryList = async () => {
   console.log('getCategoryList被调用')
   const res = await apiCategoryList()
   if (res.statusCode === 200) {
-    categoryStore.$state.list = res.data
-
+    categoryStore.$state.categoryList = res.data
   } else {
     ElMessage.error(res.message)
   }
 }
-const getIndexConfigList = async () =>{
-  console.log('getIndexConfigList被调用')
-  const res = await apiIndexConfigList()
+const getBookListAll = async () => {
+  console.log('getBookListAll被调用')
+  const res = await apiBookListAll()
   if (res.statusCode === 200) {
-    indexConfigStore.$state.list = res.data
+    bookStore.$state.bookList = res.data
   } else {
     ElMessage.error(res.message)
   }
@@ -161,17 +156,34 @@ const deleteCartItem = async (data) => {
     ElMessage.error(res.message)
   }
 }
-const getAllInfo = async () => {
-  await getBookList()
-  await getCategoryList()
-  await getIndexConfigList()
-  await getCartItemList()
+const getBookListByCategory = async () => {
+  console.log('getBookListByCategory被调用')
+  const res = await apiBookListByCategory()
+  if (res.statusCode === 200) {
+    bookStore.$state.bookListByCategory = res.data
+
+  }
+}
+const purchaseList = async (data) => {
+  console.log('purchaseList被调用')
+  const res = await apiPurchaseList(data)
+  if (res.statusCode === 200) {
+    ElMessage.success(res.message)
+  } else {
+    ElMessage.error(res.message)
+  }
 }
 
+const getAllInfo = async () => {
+  await getCategoryList()
+  await getCartItemList()
+  await getBookListAll()
+  await getBookListByCategory()
+}
 const generateCategoryMenu = async () => {
   await getCategoryList()
   categoryMenuData.value = []
-  categoryStore.$state.list.forEach((value,index,array) => {
+  categoryStore.$state.categoryList.forEach((value,index,array) => {
     categoryMenuData.value.push({
       index: '' + index,
       data: value,
@@ -179,51 +191,53 @@ const generateCategoryMenu = async () => {
     })
   })
 }
-const generateIndexCarousel = async () => {
-  await getIndexConfigList()
-  indexConfigStore.$state.list.forEach((item) =>{
-    let temp = bookStore.$state.list.filter((data) => (data.bookId === item.bookId))
-
-    indexCarouselData.value.push(temp[0])
-  })
-}
-
-onMounted(async () => {
-  await getBookList()
-  await generateCategoryMenu()
-  await generateIndexCarousel()
-})
 
 
 
+
+
+
+//事件方法
 const selectMenu = (item) => {
-  bookStore.$state.selectCategory = categoryMenuData.value[item].data
+  categoryStore.$state.selectCategory = categoryMenuData.value[item].data
   router.push('/category')
 }
+const handleShowShoppingCart = async () => {
+  await getCartItemList()
 
-const clickMenu = (item) => {
-
-}
-
-const handleShowShoppingCart = () => {
-  getCartItemList()
-  console.log(cartItemList.value)
   showShoppingCart.value = true
 }
-const handlePurchaseShoppingCart = () => {
-  
-}
-
-const handleCartItemDelete = async (scope) => {
-  await deleteCartItem({cartItemId: scope.row.cartItemBookId})
+const handlePurchaseShoppingCart = async () => {
+  await purchaseList(selectionBookList)
   await getCartItemList()
 
 }
+const handleCartItemDelete = async (scope) => {
+  await deleteCartItem({cartItemId: scope.row.cartItemId})
+  await getCartItemList()
 
+}
 const handleSelectionChange = (selection) => {
+  selectionBookList = []
   console.log(selection)
+  selection.forEach((value) => {
+    selectionBookList.push({
+      cartItemId: value.cartItemId,
+      bookId: value.bookInfo.bookId,
+      bookCount: value.bookCount,
+      userId: value.userId,
+      price: value.bookInfo.originalPrice
+
+    })
+  })
 }
 
+
+onMounted(async () => {
+  await getAllInfo()
+  await generateCategoryMenu()
+
+})
 const TestButton = () => {
 
 }
