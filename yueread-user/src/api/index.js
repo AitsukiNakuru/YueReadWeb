@@ -24,7 +24,6 @@ export const apiUpdate = (data) => {
 }
 
 
-
 export const apiBookListAll = (data) => {
     return request({
         url: '/book/listalluser',
@@ -34,7 +33,7 @@ export const apiBookListAll = (data) => {
 }
 export const apiBookListByCategory = (data) => {
     return request({
-        url: '/book/listbycategoryuser',
+        url: '/book/listbycategory',
         method: 'POST',
         data
     })
