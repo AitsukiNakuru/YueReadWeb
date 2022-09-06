@@ -2,7 +2,7 @@
   <div>
     <div style="display: flex;" >
       <h1>{{ selectCategory.categoryName }}</h1>
-      <el-button @click="TestButton">TestButton</el-button>
+
       <div>
         <el-input
             v-model="search"

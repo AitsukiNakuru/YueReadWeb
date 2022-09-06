@@ -64,6 +64,26 @@ export const useCategory = defineStore('CategoryStore', {
 
 })
 
+export const useOrder = defineStore('OrderStore', {
+    state: () =>{
+        return {
+            //分类列表
+            orderList: {
+
+            },
+        }
+    },
+
+    getters: {
+
+    },
+
+    actions: {
+
+    },
+
+})
+
 export const useHomeParams = defineStore('HomeParamsStore', {
     state: () =>{
         return {

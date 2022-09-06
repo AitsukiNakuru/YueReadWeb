@@ -20,9 +20,10 @@
       </el-col>
 
       <el-col :span="4">
-        <el-button class="line_out_button" :icon="ShoppingCart" @click="handleShowShoppingCart">购物车</el-button>
-
-        <el-button @click="TestButton">TestButton</el-button>
+        <el-button-group>
+          <el-button class="line_out_button" :icon="ShoppingCart" @click="handleShowShoppingCart">购物车</el-button>
+          <el-button class="line_out_button" :icon="ShoppingCart" @click="handleShowOrderList">订单列表</el-button>
+        </el-button-group>
       </el-col>
   </el-row>
 
@@ -76,6 +77,36 @@
     </template>
   </el-drawer>
 
+  <el-drawer v-model="showOrderList" direction="rtl">
+    <template #header>
+      <h1>订单列表</h1>
+    </template>
+    <template #default>
+      <el-table :data="filterUserOrderList" style="width: 100%" @selection-change="handleSelectionChange" :border="parentBorder">
+        <el-table-column class="infinite-list" type="expand">
+          <template #default="props">
+            <el-table :border="childBorder" :data="props.row.bookList">
+              <el-table-column label="书名" prop="bookInfo.bookName"/>
+              <el-table-column label="数量" prop="bookCount"/>
+              <el-table-column label="购买价格" prop="sellingPrice"/>
+            </el-table>
+          </template>
+        </el-table-column>
+        <el-table-column label="订单号" prop="orderId"/>
+        <el-table-column label="订单金额" prop="totalPrice"/>
+        <el-table-column label="订单状态" prop="orderStatus"/>
+        <el-table-column align="right">
+          <template #header>
+            <el-input v-model="cartSearch" size="small" placeholder="Type to search" />
+          </template>
+          <template #default="scope">
+            <el-button size="small" type="danger" @click="handleOrderRefund(scope.row)">退款</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </template>
+
+  </el-drawer>
 <!--  用户详情-->
   <el-dialog
       v-model="dialogVisible"
@@ -111,7 +142,7 @@ import {
   apiBookListByCategory,
   apiCartItemList,
   apiCategoryList,
-  apiDeleteCartItem, apiPurchaseList, apiUpdate,
+  apiDeleteCartItem, apiOrderRefund, apiPurchaseList, apiUpdate, apiUserOrderList,
 } from "@/api";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import {ElMessage} from "element-plus";
@@ -144,6 +175,17 @@ let filterCartItemList = computed(() => {
 })
 let showShoppingCart = ref(false)
 let selectionBookList = ref()
+
+
+//订单列表
+const parentBorder = ref(false)
+const childBorder = ref(false)
+let orderSearch = ref()
+let orderList = ref([])
+let showOrderList = ref(false)
+let filterUserOrderList = computed(() => {
+  return orderList.value
+})
 
 
 //用户详情
@@ -215,11 +257,30 @@ const getBookListByCategory = async () => {
 
   }
 }
+const getUserOrderList = async () => {
+  console.log('getUserOrderList')
+  const res = await apiUserOrderList({
+    userId: userStore.$state.userId
+  })
+  if (res.statusCode === 200) {
+    orderList.value = res.data
+  }
+}
 const purchaseList = async (data) => {
   console.log('purchaseList被调用')
   const res = await apiPurchaseList(data)
   if (res.statusCode === 200) {
     ElMessage.success(res.message)
+  } else {
+    ElMessage.error(res.message)
+  }
+}
+const orderRefund = async (data) => {
+  console.log('orderRefund被调用')
+  const res = await apiOrderRefund(data)
+  if (res.statusCode === 200) {
+    ElMessage.success(res.message)
+    await getUserOrderList()
   } else {
     ElMessage.error(res.message)
   }
@@ -230,6 +291,7 @@ const getAllInfo = async () => {
   await getCartItemList()
   await getBookListAll()
   await getBookListByCategory()
+  await getUserOrderList()
 }
 const generateCategoryMenu = async () => {
   await getCategoryList()
@@ -257,6 +319,10 @@ const handleShowShoppingCart = async () => {
   await getCartItemList()
 
   showShoppingCart.value = true
+}
+const handleShowOrderList = async () => {
+  await getUserOrderList()
+  showOrderList.value = true
 }
 const handlePurchaseShoppingCart = async () => {
   await purchaseList(selectionBookList)
@@ -304,6 +370,19 @@ const handleUpdateConfirm = () => {
       ElMessage.info('请正确输入用户信息')
     }
   })
+}
+const handleOrderRefund = (row) => {
+  if (row.orderStatus === 2) {
+    ElMessage.error('订单已经退款')
+  }
+  else {
+    orderRefund({
+      userId: userStore.$state.userId,
+      orderId: row.orderId,
+      totalPrice: row.totalPrice
+    })
+  }
+
 }
 
 

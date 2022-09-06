@@ -116,8 +116,7 @@
                     :type="scope.row.bookStatus === 1 ? '' : 'danger'"
                     disable-transitions
                 >{{ statusTag(scope.row.bookStatus) }}
-                </el-tag
-                >
+                </el-tag>
               </template>
             </el-table-column>
           </el-table>

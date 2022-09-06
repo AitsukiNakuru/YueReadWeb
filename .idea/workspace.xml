@@ -6,19 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7360da91-cb6c-4e71-bfdb-0af1bc792f58" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-admin/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/User.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/User.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-admin/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Category.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Order.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Order.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/api/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Carousel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Category.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +49,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cittruss/Documents/Code/MyProject/YueReadWeb/yueread-user/src&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cittruss/Documents/Code/VUE&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -87,7 +82,8 @@
       <workItem from="1661764650299" duration="47297000" />
       <workItem from="1662007733935" duration="2550000" />
       <workItem from="1662095254075" duration="1914000" />
-      <workItem from="1662168866099" duration="21000000" />
+      <workItem from="1662168866099" duration="30211000" />
+      <workItem from="1662427193550" duration="14544000" />
     </task>
     <servers />
   </component>

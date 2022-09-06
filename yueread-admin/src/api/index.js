@@ -7,7 +7,6 @@ export const apiLogin = (data) => {
         data
     })
 }
-
 export const apiUpdate = (data) => {
     return request({
         url: '/admin/update',
@@ -90,5 +89,14 @@ export const apiUserUpdate = (data) => {
         url: '/user/update',
         method: 'POST',
         data
+    })
+}
+
+
+
+export const apiOrderList = () => {
+    return request({
+        url: '/order/listall',
+        method: 'POST',
     })
 }

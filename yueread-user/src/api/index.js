@@ -26,14 +26,14 @@ export const apiUpdate = (data) => {
 
 export const apiBookListAll = (data) => {
     return request({
-        url: '/book/listall',
+        url: '/book/listalluser',
         method: 'POST',
         data
     })
 }
 export const apiBookListByCategory = (data) => {
     return request({
-        url: '/book/listbycategory',
+        url: '/book/listbycategoryuser',
         method: 'POST',
         data
     })
@@ -98,6 +98,22 @@ export const apiPurchaseBook = (data) => {
 export const apiPurchaseList = (data) => {
     return request({
         url: '/book/purchaselist',
+        method: 'POST',
+        data
+    })
+}
+
+
+export const apiUserOrderList = (data) => {
+    return request({
+        url: '/order/listbyuser',
+        method: 'POST',
+        data
+    })
+}
+export const apiOrderRefund = (data) => {
+    return request({
+        url: '/order/refund',
         method: 'POST',
         data
     })
