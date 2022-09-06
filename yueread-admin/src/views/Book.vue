@@ -2,7 +2,7 @@
   <el-table
       ref="tableRef"
       :data="filterTableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
-      style="width: 100%"
+      style="width: 100%;"
       @row-click="rowClick"
   >
 <!--书名-->
@@ -126,8 +126,6 @@
       @size-change="handleSizeChange"
   />
 
-  <el-button @click="Test">Test</el-button>
-
   <el-button type="primary" class="AddBookButton" @click="addBookButton" >添加书籍</el-button>
 
   <book-detail
@@ -176,7 +174,7 @@ let addBookForm = ref({})
 const tableRef = ref()
 let tableData = ref([])
 let currentPage = ref(1)
-const PageSize = ref(15)
+const PageSize = ref(11)
 let filterTableData = computed(() => {
   return tableData.value.filter(
       (data) => (
@@ -305,6 +303,7 @@ const handleAddConfirm = () => {
   addBooK(addBookForm)
 }
 const addBookButton = () => {
+  addBookForm.value={}
   addBookVisible.value = true
 }
 

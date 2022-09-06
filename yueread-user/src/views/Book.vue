@@ -9,7 +9,7 @@
     <el-row class="book_card_content">
       <el-col :span="6" style="padding: 10px;">
         <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+            :src=selectBook.bookCover
             class="book_card_content_image"
         />
         <p>书籍简介：</p>

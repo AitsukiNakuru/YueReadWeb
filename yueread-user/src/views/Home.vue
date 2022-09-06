@@ -2,7 +2,7 @@
 <!--  顶部工具栏-->
   <el-row class="tools">
     <el-col :span="24" style="display: flex">
-      <div class="tool_welcome">欢迎光临悦读</div>
+      <div class="tool_welcome">欢迎光临悦读!</div>
       <el-link class="tool_user" @click="handleUserDetail">{{ userStore.$state.userNickname }}</el-link>
     </el-col>
   </el-row>
@@ -21,24 +21,22 @@
 
       <el-col :span="4">
         <el-button class="line_out_button" :icon="ShoppingCart" @click="handleShowShoppingCart">购物车</el-button>
-
-        <el-button @click="TestButton">TestButton</el-button>
       </el-col>
   </el-row>
 
 <!--  左侧分类+右侧router-view-->
   <el-row class="first_screen">
-    <el-col :span="4">
+    <el-col :span="4" style="text-align: center">
       <h1>书籍分类</h1>
       <el-menu
           class="first_screen_menu"
           @select="selectMenu"
-
       >
         <div v-for="(item, index) in categoryMenuData" :key="index" >
-          <el-menu-item :index="item.index" >
-            <span>{{item.data.categoryName}}</span>
+          <el-menu-item :index="item.index">
+              <span>{{item.data.categoryName}}</span>
           </el-menu-item>
+          <hr>
         </div>
       </el-menu>
     </el-col>

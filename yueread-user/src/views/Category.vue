@@ -2,7 +2,6 @@
   <div>
     <div style="display: flex;" >
       <h1>{{ selectCategory.categoryName }}</h1>
-      <el-button @click="TestButton">TestButton</el-button>
       <div>
         <el-input
             v-model="search"
@@ -18,11 +17,14 @@
     <div class="bookList">
       <div v-for="(item, index) in filterBookList" >
         <el-card :body-style="{ padding: '0px'}" v-bind:id="item.bookId" class="bookList_card" @click="handleCard">
-          <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              v-bind:id="item.bookId"
-              class="image"
-          />
+          <div style="width: 200px;height: 300px;display:flex" >
+            <img
+                :src=item.bookCover
+                style="width: 200px;align-self:center"
+                v-bind:id="item.bookId"
+                class="image"
+            />
+          </div>
           <div style="padding: 14px">
             <span>{{ item.bookName }}</span>
           </div>
