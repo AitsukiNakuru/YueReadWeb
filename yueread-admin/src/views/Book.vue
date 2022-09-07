@@ -2,7 +2,7 @@
   <el-table
       ref="tableRef"
       :data="filterTableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
-      style="width: 100%"
+      style="width: 100%; height: 85%"
       @row-click="rowClick"
   >
 <!--书名-->
@@ -31,11 +31,13 @@
       </template>
     </el-table-column>
 <!--封面-->
-    <el-table-column
-        label="封面"
-        prop="bookCover"
-        width="200"
-    />
+<!--    <el-table-column-->
+<!--        label="封面"-->
+<!--        prop="bookCover"-->
+<!--        width="200"-->
+<!--    >-->
+<!--      <el-image style="width: 100px; height: 100px" :src="bookCover" fit="cover" />-->
+<!--    </el-table-column>-->
 <!--分类-->
     <el-table-column
         label="分类"
@@ -126,7 +128,7 @@
       @size-change="handleSizeChange"
   />
 
-  <el-button @click="Test">Test</el-button>
+
 
   <el-button type="primary" class="AddBookButton" @click="addBookButton" >添加书籍</el-button>
 

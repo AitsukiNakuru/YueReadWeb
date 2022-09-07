@@ -41,7 +41,7 @@ export const useBookStore = defineStore('BookStore', {
     actions: {
 
     },
-
+    persist: true
 })
 
 export const useCategory = defineStore('CategoryStore', {

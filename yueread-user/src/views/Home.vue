@@ -29,12 +29,12 @@
 
 <!--  左侧分类+右侧router-view-->
   <el-row class="first_screen">
-    <el-col :span="4">
-      <h1>书籍分类</h1>
+    <el-col :span="4" >
+      <h1 style="margin-left: 70px">书籍分类</h1>
       <el-menu
           class="first_screen_menu"
           @select="selectMenu"
-
+          style="height: 90%"
       >
         <div v-for="(item, index) in categoryMenuData" :key="index" >
           <el-menu-item :index="item.index" >
@@ -62,7 +62,7 @@
         <el-table-column label="数量" prop="bookCount"></el-table-column>
         <el-table-column align="right">
           <template #header>
-            <el-input v-model="cartSearch" size="small" placeholder="Type to search" />
+
           </template>
           <template #default="scope">
             <el-button size="small" type="danger" @click="handleCartItemDelete(scope)">Delete</el-button>
@@ -77,7 +77,7 @@
     </template>
   </el-drawer>
 
-  <el-drawer v-model="showOrderList" direction="rtl">
+  <el-drawer v-model="showOrderList" direction="rtl" size="50%">
     <template #header>
       <h1>订单列表</h1>
     </template>
@@ -85,7 +85,7 @@
       <el-table :data="filterUserOrderList" style="width: 100%" @selection-change="handleSelectionChange" :border="parentBorder">
         <el-table-column class="infinite-list" type="expand">
           <template #default="props">
-            <el-table :border="childBorder" :data="props.row.bookList">
+            <el-table :border="childBorder" :data="props.row.bookList" style="margin-left:50px">
               <el-table-column label="书名" prop="bookInfo.bookName"/>
               <el-table-column label="数量" prop="bookCount"/>
               <el-table-column label="购买价格" prop="sellingPrice"/>
@@ -94,11 +94,18 @@
         </el-table-column>
         <el-table-column label="订单号" prop="orderId"/>
         <el-table-column label="订单金额" prop="totalPrice"/>
-        <el-table-column label="订单状态" prop="orderStatus"/>
-        <el-table-column align="right">
-          <template #header>
-            <el-input v-model="cartSearch" size="small" placeholder="Type to search" />
+        <el-table-column label="订单状态" prop="orderStatus">
+          <template #default="scope">
+            <el-tag
+                :type="scope.row.orderStatus === 1 ? '' : 'danger'"
+                disable-transitions
+            >{{ orderStatusTag(scope.row.orderStatus) }}
+            </el-tag>
           </template>
+        </el-table-column>
+        <el-table-column label="订单日期" prop="orderDate" :formatter="timeFormatter"/>
+        <el-table-column align="right">
+
           <template #default="scope">
             <el-button size="small" type="danger" @click="handleOrderRefund(scope.row)">退款</el-button>
           </template>
@@ -385,6 +392,25 @@ const handleOrderRefund = (row) => {
 
 }
 
+
+//数据修饰
+const orderStatusTag = (cellValue) => {
+  if (cellValue === 1) {
+    return '已完成'
+  }
+  if (cellValue === 2) {
+    return '已退款'
+  }
+}
+const timeFormatter = (row, column, cellValue, index) => {
+  let date = new Date(cellValue);
+  let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+  let currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+  let hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+  let mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+  let ss = date.getSeconds()
+  return date.getFullYear() + "-" + month + "-" + currentDate + " " + hh + ":" + mm + ":" + ss
+}
 
 
 onMounted(async () => {

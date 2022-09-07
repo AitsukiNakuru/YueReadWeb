@@ -17,7 +17,7 @@
       <el-form-item label="分类" prop="bookCategoryName">
         <el-select v-model="addBookForm.bookCategoryName" placeholder="Select" @change="changeCategory">
           <el-option
-              v-for="item in categoryList"
+              v-for="item in categoryStore.$state.categoryList"
               :key="item.categoryId"
               :label="item.categoryName"
               :value="item.categoryName"
@@ -86,7 +86,7 @@ import router from "@/router";
 
 let categoryStore = useCategory()
 
-const categoryList = categoryStore.$state.categoryList
+let categoryList = categoryStore.$state.categoryList
 
 let props = defineProps({
   addBookVisible: Boolean,
@@ -149,6 +149,10 @@ const changeCategory = (val) => {
     }
   })
 }
+
+onMounted(() => {
+  let categoryList = categoryStore.$state.categoryList
+})
 
 </script>
 

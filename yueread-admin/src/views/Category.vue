@@ -41,11 +41,11 @@
               </template>
             </el-table-column>
             <!--封面-->
-            <el-table-column
-                label="封面"
-                prop="bookCover"
-                width="auto"
-            />
+<!--            <el-table-column-->
+<!--                label="封面"-->
+<!--                prop="bookCover"-->
+<!--                width="auto"-->
+<!--            />-->
             <!--分类-->
             <el-table-column
                 label="分类"
@@ -100,7 +100,6 @@
             </el-table-column>
             <!--销售状态-->
             <el-table-column
-                :filter-method="statusFilter"
                 :filters="[
         { text: '已上架', value: 1 },
         { text: '未上架', value: 0 }
@@ -147,6 +146,7 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="categoryDetailVisible = false">取消</el-button>
+        <el-button @click="handleDeleteCategory">删除分类</el-button>
         <el-button type="primary" @click="handleUpdateConfirm">确认修改</el-button>
       </span>
     </template>
@@ -164,7 +164,7 @@ import {
   apiAddBook,
   apiBookListAll,
   apiAddCategory,
-  apiUpdateCategory
+  apiUpdateCategory, apiDeleteCategory
 } from "@/api";
 import {ElMessage} from "element-plus";
 import {useAdminStore, useBookStore, useCategory} from "@/store";
@@ -228,6 +228,17 @@ const updateCategory = async () => {
     ElMessage.error(res.message)
   }
 }
+const deleteCategory = async () => {
+  console.log('deleteCategory被调用')
+  const res = await apiDeleteCategory(categoryDetailForm.value)
+  if (res.statusCode === 200) {
+    ElMessage.success(res.message)
+    categoryDetailVisible.value = false
+    await getBookListByCategory()
+  } else {
+    ElMessage.error(res.message)
+  }
+}
 
 
 //表格数据修饰
@@ -269,6 +280,9 @@ const cellClick = (row, column, cell, event) => {
   categoryDetailForm.value.categoryId = JSON.parse(JSON.stringify(row.categoryId))
   console.log(categoryDetailForm.value)
   categoryDetailVisible.value = true
+}
+const handleDeleteCategory = () => {
+  deleteCategory()
 }
 
 

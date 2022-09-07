@@ -66,10 +66,16 @@ export const apiAddCategory = (data) => {
         data
     })
 }
-
 export const apiUpdateCategory = (data) => {
     return request({
         url: '/category/update',
+        method: 'POST',
+        data
+    })
+}
+export const apiDeleteCategory = (data) => {
+    return request({
+        url: '/category/delete',
         method: 'POST',
         data
     })

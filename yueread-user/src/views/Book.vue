@@ -4,57 +4,57 @@
       <div class="book_card_header">
         <h1>{{ selectBook.bookName }}</h1>
       </div>
-      <el-button @click="TestButton">TestButton</el-button>
+
     </template>
     <el-row class="book_card_content">
       <el-col :span="6" style="padding: 10px;">
-        <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-            class="book_card_content_image"
-        />
+        <el-image class="book_card_content_image" :src=selectBook.bookCover fit="cover" />
         <p>书籍简介：</p>
         <p style="text-indent: 1cm">{{selectBook.bookIntro}}</p>
       </el-col>
 
-      <el-col :span="18" style="padding: 10px">
-        <el-row class="">
+      <el-col :span="18" style="padding-left: 200px; padding-top: 50px">
+        <el-row class="book_card_content_detail">
           <el-col class="" :span="4">图书售价</el-col>
           <el-col class="" :span="20">{{selectBook.originalPrice}}</el-col>
         </el-row>
 
-        <el-row class="">
+        <el-row class="book_card_content_detail">
           <el-col class="" :span="4">作者</el-col>
           <el-col class="" :span="20">{{selectBook.bookAuthor}}</el-col>
         </el-row>
 
-        <el-row class="">
+        <el-row class="book_card_content_detail">
           <el-col class="" :span="4">分类</el-col>
           <el-col class="" :span="20">{{selectBook.bookCategoryName}}</el-col>
         </el-row>
 
-        <el-row class="">
+        <el-row class="book_card_content_detail">
           <el-col class="" :span="4">ISBN</el-col>
           <el-col class="" :span="20">{{selectBook.bookIsbn}}</el-col>
         </el-row>
 
-        <el-row class="">
+        <el-row class="book_card_content_detail">
           <el-col class="" :span="4">出版社</el-col>
           <el-col class="" :span="20">{{selectBook.publisher}}</el-col>
         </el-row>
 
-        <el-row class="">
+        <el-row class="book_card_content_detail">
           <el-col class="" :span="4">出版日期</el-col>
           <el-col class="" :span="20">{{selectBook.publishDate}}</el-col>
         </el-row>
 
-        <el-row class="">
+        <el-row class="book_card_content_detail">
           <el-col class="" :span="4">详细信息</el-col>
           <el-col class="" :span="20">{{selectBook.detailContent}}</el-col>
         </el-row>
 
-        <el-input-number v-model="bookCount" class="mx-4" />
-        <el-button @click="handlePurchase">立即购买</el-button>
-        <el-button @click="handleAddCartItem">加入购物车</el-button>
+        <el-row class="book_card_content_detail">
+          <el-input-number v-model="bookCount" />
+          <el-button @click="handlePurchase" style="margin-left:50px">立即购买</el-button>
+          <el-button @click="handleAddCartItem">加入购物车</el-button>
+        </el-row>
+
       </el-col>
     </el-row>
   </el-card>

@@ -38,7 +38,7 @@
     </el-table-column>
 
     <el-table-column label="购买金额"
-        prop="userVip" sortable
+        prop="userPurchase" sortable
         width="160"
     >
 

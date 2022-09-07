@@ -4,7 +4,9 @@
       <el-card :body-style="{ padding: '0px' }" class="first_screen_carousel_card"  @click="handleCard(item)" >
         <el-row style="width: 1200px">
           <el-col :span="8">
-            <div class="first_screen_carousel_image"></div>
+            <div class="first_screen_carousel_image">
+              <el-image class="first_screen_carousel_image" :src=item.bookCover fit="cover" />
+            </div>
           </el-col>
           <el-col :span="16">
             <div class="first_screen_carousel_info">

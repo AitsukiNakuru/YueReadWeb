@@ -1,8 +1,7 @@
 <template>
   <div>
     <div style="display: flex;" >
-      <h1>{{ selectCategory.categoryName }}</h1>
-      <el-button @click="TestButton">TestButton</el-button>
+      <h1 style="margin-left: 70px">{{ selectCategory.categoryName }}</h1>
       <div>
         <el-input
             v-model="search"
@@ -17,12 +16,8 @@
     </div>
     <div class="bookList">
       <div v-for="(item, index) in filterBookList" >
-        <el-card :body-style="{ padding: '0px'}" v-bind:id="item.bookId" class="bookList_card" @click="handleCard">
-          <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              v-bind:id="item.bookId"
-              class="image"
-          />
+        <el-card :body-style="{ padding: '0px'}" v-bind:id="item.bookId" class="bookList_card" @click="handleCard(item)">
+          <el-image style="height: 250px; width: 200px" :src=item.bookCover fit="cover" />
           <div style="padding: 14px">
             <span>{{ item.bookName }}</span>
           </div>
@@ -92,7 +87,7 @@ onMounted(async () => {
 
 
 const handleCard = (item) => {
-  bookStore.$state.selectBook = bookStore.$state.bookList.filter((data) => data.bookId == item.target.id)[0]
+  bookStore.$state.selectBook = item
 
   router.push('/book')
 }

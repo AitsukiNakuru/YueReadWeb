@@ -33,7 +33,7 @@ export const apiBookListAll = (data) => {
 }
 export const apiBookListByCategory = (data) => {
     return request({
-        url: '/book/listbycategory',
+        url: '/book/listbycategoryuser',
         method: 'POST',
         data
     })

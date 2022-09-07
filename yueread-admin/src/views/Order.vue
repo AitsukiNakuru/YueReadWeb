@@ -42,11 +42,11 @@
                   </template>
                 </el-table-column>
                 <!--封面-->
-                <el-table-column
-                    label="封面"
-                    prop="bookInfo.bookCover"
-                    width="auto"
-                />
+<!--                <el-table-column-->
+<!--                    label="封面"-->
+<!--                    prop="bookInfo.bookCover"-->
+<!--                    width="auto"-->
+<!--                />-->
                 <!--分类-->
                 <el-table-column
                     label="分类"
@@ -123,7 +123,7 @@
           <el-table-column label="订单号" prop="orderId"/>
           <el-table-column label="订单金额" prop="totalPrice" sortable/>
           <el-table-column label="书籍数量" prop="bookList.length" sortable/>
-          <el-table-column label="订单日期" prop="orderDate" sortable/>
+          <el-table-column label="订单日期" prop="orderDate" sortable :formatter="orderTimeFormatter"/>
           <el-table-column label="订单状态"
                            :filters="[{ text: '已完成', value: 1 },{ text: '已退款', value: 2 }]"
                            prop="orderStatus">
@@ -189,6 +189,7 @@ const getOrderList = async () => {
   const res = await apiOrderList()
   if (res.statusCode === 200) {
     tableData.value = res.data
+    console.log(res.data)
   }
 }
 
@@ -201,6 +202,15 @@ const timeFormatter = (row, column, cellValue, index) => {
   let hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
   let mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
   return date.getFullYear() + "-" + month + "-" + currentDate
+}
+const orderTimeFormatter = (row, column, cellValue, index) => {
+  let date = new Date(cellValue);
+  let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+  let currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+  let hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+  let mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+  let ss = date.getSeconds()
+  return date.getFullYear() + "-" + month + "-" + currentDate + " " + hh + ":" + mm + ":" + ss
 }
 const orderStatusTag = (cellValue) => {
   if (cellValue === 1) {
