@@ -307,6 +307,7 @@ const handleAddConfirm = () => {
   addBooK(addBookForm)
 }
 const addBookButton = () => {
+  addBookForm.value = {}
   addBookVisible.value = true
 }
 
