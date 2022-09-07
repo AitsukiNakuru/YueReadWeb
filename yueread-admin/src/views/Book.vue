@@ -93,6 +93,28 @@
     >
 
     </el-table-column>
+
+
+    <el-table-column
+        label="首页展示"
+        prop="carousel"
+        width="100"
+        :filter-method="carouselFilter"
+        :filters="[
+        { text: '展示', value: 1 },
+        { text: '不展示', value: 0 }
+        ]"
+    >
+      <template #default="scope">
+        <el-tag
+            :type="scope.row.carousel === 1 ? '' : 'danger'"
+            disable-transitions
+        >{{ carouselTag(scope.row.carousel) }}
+        </el-tag
+        >
+      </template>
+    </el-table-column>
+
 <!--销售状态-->
     <el-table-column
         :filter-method="statusFilter"
@@ -273,8 +295,19 @@ const statusTag = (cellValue) => {
     return '已上架'
   }
 }
+const carouselTag = (cellValue) => {
+  if (cellValue === 0) {
+    return '不展示'
+  }
+  if (cellValue === 1) {
+    return '展示'
+  }
+}
 const statusFilter = (value, row) => {
   return row.bookStatus === value
+}
+const carouselFilter = (value, row) => {
+  return row.carousel === value
 }
 
 

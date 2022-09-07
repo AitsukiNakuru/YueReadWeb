@@ -4,6 +4,7 @@
     <el-col :span="24" style="display: flex">
       <div class="tool_welcome">欢迎光临悦读</div>
       <el-link class="tool_user" @click="handleUserDetail">{{ userStore.$state.userNickname }}</el-link>
+      <el-link class="tool_user" @click="handleLogout">登出</el-link>
     </el-col>
   </el-row>
 
@@ -11,7 +12,7 @@
   <el-row class="line_out" >
 
       <el-col :span="4">
-        <div class="line_out_title">悦读</div>
+        <div class="line_out_title" @click="clickTitle">悦读</div>
 
       </el-col>
 
@@ -38,7 +39,7 @@
       >
         <div v-for="(item, index) in categoryMenuData" :key="index" >
           <el-menu-item :index="item.index" >
-            <span>{{item.data.categoryName}}</span>
+            <span style="padding-left: 20%">{{item.data.categoryName}}</span>
           </el-menu-item>
         </div>
       </el-menu>
@@ -358,6 +359,12 @@ const handleSelectionChange = (selection) => {
 const handleUserDetail = () => {
   updateFrom.value = JSON.parse(JSON.stringify(userStore.$state))
   dialogVisible.value = true;
+}
+const handleLogout = () => {
+  router.push('/login')
+}
+const clickTitle = () => {
+  router.push('/carousel')
 }
 const handleUpdateCancel = () => {
   dialogVisible.value = false;

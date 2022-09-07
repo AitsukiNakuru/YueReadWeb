@@ -5,7 +5,7 @@
       <el-header class="HomeHeader">
         <p class="HomeTitle">YueRead后台管理系统</p>
         <el-popover
-            :width="200"
+            :width="230"
             class="HomePopover"
             content="this is content, this is content, this is content"
             placement="bottom"
@@ -22,6 +22,7 @@
 
           <p>用户名：{{adminStore.$state.adminUsername}}</p>
           <el-button @click="handleUpdateAdmin">修改管理员信息</el-button>
+          <el-button @click="handleLogout">登出</el-button>
         </el-popover>
       </el-header>
 
@@ -176,6 +177,9 @@ const handleUpdateConfirm = () => {
       ElMessage.info('请正确输入用户信息')
     }
   })
+}
+const handleLogout = () => {
+  router.push('/login')
 }
 
 

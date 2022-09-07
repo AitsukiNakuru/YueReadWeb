@@ -21,11 +21,24 @@
       </el-card>
     </el-carousel-item>
   </el-carousel>
+
+  <h1 style="margin-left: 50px">热销排行</h1>
+
+  <div class="bookList" style="margin-left: 20px">
+    <div v-for="(item, index) in hotSaleList" >
+      <el-card :body-style="{ padding: '0px'}" v-bind:id="item.bookId" class="bookList_card" @click="handleCard(item)">
+        <el-image style="height: 250px; width: 200px" :src=item.bookCover fit="cover" />
+        <div style="padding: 14px">
+          <span>{{ item.bookName }}</span>
+        </div>
+      </el-card>
+    </div>
+  </div>
 </template>
 
 <script setup>
 import {ref, onMounted} from 'vue';
-import {apiBookListAll, apiCarouselBookList, apiCategoryList} from "@/api";
+import {apiBookListAll, apiCarouselBookList, apiCategoryList, apiHotSaleList} from "@/api";
 import {useBookStore, useCategoryStore, useUserStore} from "@/store";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import {ElMessage} from "element-plus";
@@ -43,6 +56,8 @@ let categoryStore = useCategoryStore()
 let carouselBookList = ref([])
 
 
+let hotSaleList = ref([])
+
 
 
 const getCarouselBookList = async () =>{
@@ -54,8 +69,18 @@ const getCarouselBookList = async () =>{
     ElMessage.error(res.message)
   }
 }
+const getHotSaleList = async () =>{
+  console.log('getHotSaleList被调用')
+  const res = await apiHotSaleList()
+  if (res.statusCode === 200) {
+    hotSaleList.value = res.data
+  } else {
+    ElMessage.error(res.message)
+  }
+}
 const getAllInfo = async () => {
   await getCarouselBookList()
+  await getHotSaleList()
 }
 
 const handleCard = (item) => {
@@ -67,7 +92,7 @@ const handleCard = (item) => {
 
 
 onMounted(async () => {
-  await getCarouselBookList()
+  await getAllInfo()
 })
 
 </script>

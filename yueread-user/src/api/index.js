@@ -38,6 +38,12 @@ export const apiBookListByCategory = (data) => {
         data
     })
 }
+export const apiHotSaleList = () => {
+    return request({
+        url: '/book/hotsale',
+        method: 'POST',
+    })
+}
 
 
 export const apiCategoryList = (data) => {

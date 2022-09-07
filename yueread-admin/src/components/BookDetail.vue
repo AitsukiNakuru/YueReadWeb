@@ -20,7 +20,7 @@
       </el-form-item>
 
       <el-form-item label="分类" prop="bookCategoryName">
-        <el-select v-model="bookDetailForm.bookCategoryName" placeholder="Select" @change="changeCategory">
+        <el-select v-model="bookDetailForm.bookCategoryName" placeholder="选择分类" @change="changeCategory">
           <el-option
               v-for="item in categoryList"
               :key="item.categoryId"
@@ -55,12 +55,19 @@
         <el-input-number v-model="bookDetailForm.bookStock" />
       </el-form-item>
 
-      <el-form-item label="销售状态" prop="publishDate">
+      <el-form-item label="出版日期 " prop="publishDate">
         <el-date-picker
             v-model="bookDetailForm.publishDate"
             type="date"
-            placeholder="Pick a day"
+            placeholder="选择日期"
         />
+      </el-form-item>
+
+      <el-form-item label="首页展示" prop="carousel">
+        <el-radio-group v-model="bookDetailForm.carousel">
+          <el-radio label='1' border>展示</el-radio>
+          <el-radio label='0' border>不展示</el-radio>
+        </el-radio-group>
       </el-form-item>
 
       <el-form-item label="上架状态" prop="bookStatus">
@@ -123,6 +130,9 @@ const rules = ref({
   bookStock: [
     { required: true, message: '请输入库存', trigger: 'blur' },
     { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+  ],
+  carousel: [
+    { required: true, message: '首页展示', trigger: 'blur' },
   ],
   bookStatus: [
     { required: true, message: '销售状态', trigger: 'blur' },

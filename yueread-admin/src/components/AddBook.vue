@@ -58,6 +58,13 @@
       </el-form-item>
 
 
+      <el-form-item label="首页展示" prop="carousel">
+        <el-radio-group v-model="addBookForm.carousel">
+          <el-radio label='1' border>展示</el-radio>
+          <el-radio label='0' border>不展示</el-radio>
+        </el-radio-group>
+      </el-form-item>
+
       <el-form-item label="销售状态" prop="bookStatus">
         <el-radio-group v-model="addBookForm.bookStatus">
           <el-radio label='1' border>已上架</el-radio>
@@ -133,6 +140,9 @@ const rules = ref({
   bookStock: [
     { required: true, message: '请输入库存', trigger: 'blur' },
     { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+  ],
+  carousel: [
+    { required: true, message: '首页展示', trigger: 'blur' },
   ],
   bookStatus: [
     { required: true, message: '销售状态', trigger: 'blur' },
