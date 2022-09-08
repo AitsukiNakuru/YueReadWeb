@@ -94,7 +94,7 @@
           </template>
         </el-table-column>
         <el-table-column label="订单号" prop="orderId"/>
-        <el-table-column label="订单金额" prop="totalPrice"/>
+        <el-table-column label="订单金额" prop="totalPrice" sortable/>
         <el-table-column label="订单状态" prop="orderStatus">
           <template #default="scope">
             <el-tag
@@ -104,7 +104,7 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="订单日期" prop="orderDate" :formatter="timeFormatter"/>
+        <el-table-column label="订单日期" prop="orderDate" :formatter="timeFormatter" sortable/>
         <el-table-column align="right">
 
           <template #default="scope">
