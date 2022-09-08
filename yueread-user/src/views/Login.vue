@@ -69,17 +69,21 @@ const rules = ref({
 const handleSubmit = () => {
   if(nickNameShow.value) {
     LoginFormRef.value.validate(async (valid) => {
-      if (valid) {
-        const res = await apiRegister(LoginForm.value)
-        if (res.statusCode === 200) {
-          ElMessage.success(res.message)
-          userStore.$state = res.data
+      if(LoginForm.value.userNickname.trim()!==''&&LoginForm.value.userUsername.trim()!==''&&LoginForm.value.userPassword.trim()!==''){
+        if (valid) {
+          const res = await apiRegister(LoginForm.value)
+          if (res.statusCode === 200) {
+            ElMessage.success(res.message)
+            userStore.$state = res.data
 
+          } else {
+            ElMessage.error(res.message)
+          }
         } else {
-          ElMessage.error(res.message)
+          ElMessage.info('请正确输入注册信息')
         }
-      } else {
-        ElMessage.info('请正确输入注册信息')
+      }else {
+        ElMessage.info('输入项不能为空！')
       }
     })
   } else {
@@ -98,6 +102,8 @@ const handleSubmit = () => {
       }
     })
   }
+
+
 }
 const handleChange = () => {
   nickNameShow.value = !nickNameShow.value;

@@ -370,20 +370,26 @@ const handleUpdateCancel = () => {
   dialogVisible.value = false;
 }
 const handleUpdateConfirm = () => {
-  updateFormRef.value.validate(async (valid) => {
-    if (valid) {
-      const res = await apiUpdate(updateFrom.value)
-      if (res.statusCode === 200) {
-        ElMessage.success(res.message)
-        dialogVisible.value = false
-        userStore.$state = updateFrom.value
+  if(updateFrom.value.userNickname.trim()!==''&&updateFrom.value.userUsername.trim()!==''&&updateFrom.value.userPassword.trim()!==''){
+    updateFormRef.value.validate(async (valid) => {
+      if (valid) {
+        const res = await apiUpdate(updateFrom.value)
+        if (res.statusCode === 200) {
+          ElMessage.success(res.message)
+          dialogVisible.value = false
+          userStore.$state = updateFrom.value
+        } else {
+          ElMessage.error(res.message)
+        }
       } else {
-        ElMessage.error(res.message)
+        ElMessage.info('请正确输入用户信息')
       }
-    } else {
-      ElMessage.info('请正确输入用户信息')
-    }
-  })
+    })
+  }
+  else {
+    ElMessage.info('输入项不能为空！')
+  }
+
 }
 const handleOrderRefund = (row) => {
   if (row.orderStatus === 2) {
@@ -425,6 +431,7 @@ onMounted(async () => {
   await generateCategoryMenu()
 
 })
+
 const TestButton = () => {
 
 }

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import {ElMessage} from "element-plus";
 
 const routes = [
   {
@@ -63,4 +64,25 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login'){
+    next()
+  } else {
+    if (localStorage.AdminStore == null) {
+      ElMessage.info('请登录')
+      next('/login')
+    } else {
+      const loginData = JSON.parse(localStorage.AdminStore)
+      let isLogin = loginData != null;
+      if (isLogin) {
+        next();
+      } else {
+        // 是否在登录状态下
+
+        ElMessage.info('请登录')
+        next('/login')
+      }
+    }
+  }
+})
 export default router

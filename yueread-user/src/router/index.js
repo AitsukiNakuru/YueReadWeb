@@ -1,4 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import {ElMessage} from "element-plus";
+
+
+
+
 
 const routes = [
   {
@@ -21,6 +26,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "home" */ '../views/Home'),
     redirect: 'carousel',
+
     children: [
       {
         path: '/carousel',
@@ -55,5 +61,25 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login'){
+    next()
+  } else {
+    if (localStorage.UserStore == null) {
+      ElMessage.info('请登录')
+      next('/login')
+    } else {
+      const loginData = JSON.parse(localStorage.UserStore)
+      let isLogin = loginData != null;
+      if (isLogin) {
+        next();
+      } else {
+        // 是否在登录状态下
 
+        ElMessage.info('请登录')
+        next('/login')
+      }
+    }
+  }
+})
 export default router
