@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="098f76c3-95e1-4bf1-ba9a-fd6aa0712f7c" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-user/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yueread-user/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-user/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/AddBook.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/components/BookDetail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" beforeDir="false" afterPath="$PROJECT_DIR$/yueread-admin/src/views/Book.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +82,8 @@
       <workItem from="1662477436815" duration="2255000" />
       <workItem from="1662480320583" duration="8611000" />
       <workItem from="1662558474725" duration="3935000" />
-      <workItem from="1662602399662" duration="2818000" />
+      <workItem from="1662602399662" duration="4449000" />
+      <workItem from="1662625687428" duration="3247000" />
     </task>
     <servers />
   </component>

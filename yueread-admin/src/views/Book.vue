@@ -155,6 +155,7 @@
   <el-button type="primary" class="AddBookButton" @click="addBookButton" >添加书籍</el-button>
 
   <book-detail
+      ref="bookDetailRef"
       v-model='bookDetailVisible'
       :bookDetailForm="bookDetailForm"
       @handleDetailCancel="handleDetailCancel"
@@ -163,6 +164,7 @@
   ></book-detail>
 
   <add-book
+      ref="addBookRef"
     v-model='addBookVisible'
     :addBookForm="addBookForm"
     @handleAddCancel="handleAddCancel"
@@ -194,7 +196,8 @@ let bookDetailVisible = ref(false)
 let addBookVisible = ref(false)
 let bookDetailForm = ref({})
 let addBookForm = ref({})
-
+let bookDetailRef = ref()
+let addBookRef =ref()
 
 //书籍列表数据
 const tableRef = ref()
@@ -251,6 +254,7 @@ const getAllInfo = async () => {
 }
 const updateBook = async () => {
   console.log('updateBook被调用')
+
   const res = await apiUpdateBook(bookDetailForm.value)
   console.log(bookDetailForm.value)
   if (res.statusCode === 200) {
@@ -331,13 +335,31 @@ const handleDetailCancel = () => {
 
 }
 const handleDetailConfirm = () => {
-  updateBook(bookDetailForm)
+
+  bookDetailRef.value.bookDetailValidate(async (valid) => {
+    if (valid) {
+
+      await updateBook(bookDetailForm)
+
+    } else {
+      ElMessage.info('请正确输入书籍信息')
+    }
+  })
 }
 const handleAddCancel = () => {
   addBookVisible.value = false;
 }
 const handleAddConfirm = () => {
-  addBooK(addBookForm)
+
+  addBookRef.value.addBookValidate(async (valid) => {
+    if (valid) {
+
+      await addBooK(addBookForm)
+
+    } else {
+      ElMessage.info('请正确输入书籍信息')
+    }
+  })
 }
 const addBookButton = () => {
   addBookForm.value = {}

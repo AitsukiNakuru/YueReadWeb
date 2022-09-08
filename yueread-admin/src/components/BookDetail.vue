@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="bookDetailVisible" title="书籍详情">
 
-    <el-form :model="bookDetailForm" ref="bookDetailFormRef">
+    <el-form :model="bookDetailForm" ref="bookDetailFormRef" :rules="rules">
 
       <el-form-item label="书籍Id" prop="bookId">
         <el-input v-model="bookDetailForm.bookId" disabled/>
@@ -119,7 +119,7 @@ const rules = ref({
   ],
   originalPrice: [
     { required: true, message: '请输入价格', trigger: 'blur' },
-    { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+    { pattern: /^(?!(0[0-9]{0,}$))[0-9]{1,}[.]{0,}[0-9]{0,}$/, message: '请输入正数', trigger: 'blur'}
   ],
   publisher: [
     { required: true, message: '请输入出版社', trigger: 'blur' },
@@ -129,7 +129,7 @@ const rules = ref({
   ],
   bookStock: [
     { required: true, message: '请输入库存', trigger: 'blur' },
-    { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+    { pattern: /^[1-9]\d*$/, message: '请输入正整数', trigger: 'blur'}
   ],
   carousel: [
     { required: true, message: '首页展示', trigger: 'blur' },
@@ -158,8 +158,17 @@ const changeCategory = (val) => {
     }
   })
 }
-
 const bookDetailFormRef = ref()
+
+const bookDetailValidate = (callback) => {
+  bookDetailFormRef.value.validate((valid) => {
+    callback(valid);
+  });
+}
+
+defineExpose({ bookDetailValidate});
+
+
 
 
 

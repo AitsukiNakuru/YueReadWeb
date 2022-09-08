@@ -54,7 +54,7 @@
       </el-form-item>
 
       <el-form-item label="库存" prop="bookStock">
-        <el-input v-model="addBookForm.bookStock" />
+        <el-input-number v-model="addBookForm.bookStock" />
       </el-form-item>
 
 
@@ -106,7 +106,7 @@ const emits = defineEmits({
   handleAddConfirm: Function
 })
 
-const addBookFormRef = ref()
+
 
 const rules = ref({
   bookName: [
@@ -129,7 +129,7 @@ const rules = ref({
   ],
   originalPrice: [
     { required: true, message: '请输入价格', trigger: 'blur' },
-    { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+    { pattern: /^(?!(0[0-9]{0,}$))[0-9]{1,}[.]{0,}[0-9]{0,}$/, message: '请输入正数', trigger: 'blur'}
   ],
   publisher: [
     { required: true, message: '请输入出版社', trigger: 'blur' },
@@ -139,7 +139,7 @@ const rules = ref({
   ],
   bookStock: [
     { required: true, message: '请输入库存', trigger: 'blur' },
-    { pattern: /^(\-|\+)?\d+(\.\d+)?$/, message: '请输入数字', trigger: 'blur'}
+    { pattern: /^[1-9]\d*$/, message: '请输入正整数', trigger: 'blur'}
   ],
   carousel: [
     { required: true, message: '首页展示', trigger: 'blur' },
@@ -159,6 +159,14 @@ const changeCategory = (val) => {
     }
   })
 }
+const addBookFormRef = ref()
+const addBookValidate = (callback) => {
+  addBookFormRef.value.validate((valid) => {
+    callback(valid);
+  });
+}
+
+defineExpose({ addBookValidate});
 
 onMounted(() => {
   let categoryList = categoryStore.$state.categoryList
